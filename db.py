@@ -103,20 +103,20 @@ def delete(playlistid):
         db.close()
     
     
-# def edit(playlistid, title, description, img_source, video_source, category_id):
+def edit(playlistid, title, description, img_source, video_source, category_id):
     
-#     db =  database()
+    db =  database()
     
-#     sql = "UPDATE  playlists WHERE playlist_id = {}".format(playlistid)
+    sql = "UPDATE playlists SET title = '{1}', description = '{2}', img_source = '{3}', video_source = '{4}', category_id = {5} WHERE playlist_id = {0}".format(playlistid, title, description, img_source, video_source, category_id)
     
-#     try:
-#         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-#             cursor.execute(sql)
-#             db.commit()
-#     finally:
-#         db.close()
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(sql)
+            db.commit()
+    finally:
+        db.close()
     
-#     db = database()
+    db = database()
     
 # Get categories
 def getCategories():

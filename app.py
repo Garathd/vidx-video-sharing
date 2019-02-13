@@ -121,33 +121,34 @@ def delete(playlistid):
         return redirect('/{}'.format(user_name))
         
     
-@app.route('/edit/<playlistid>', methods=['GET','POST'])
+@app.route('/edit/<playlistid>')
 def edit(playlistid):
     
- 
     user_name = db.getLogin()
     categories = db.getCategories()
     playlist = db.getPlaylistById(playlistid)
         
-    # for play in playlist:
-            
-    #     title = play['title']
-    #     description = play['description']
-    #     img_source = play['img_source']
-    #     video_source = play['video_source']
-    #     category_id = play['category_id']
-        
-    # db.edit(playlistid, title, description, img_source, video_source, category_id)   
-        
- 
     return render_template('edit-playlist.html', playlist=playlist,categories=categories)
     
     
 @app.route('/edit-playlist', methods=['GET','POST'])
 def editplaylist():
     
-    return("/")
-    
+    if request.method == 'POST':
+        form = request.form
+        playlistid = int(form['playlist_id'])
+        title = form['title']
+        description = form['description']
+        img_source = form['image']
+        video_source = form['video']
+        category_id = int(form['category_id'])
+        
+    try:
+        user_name = db.getLogin()
+        db.edit(playlistid, title, description, img_source, video_source, category_id)
+    finally:
+        return redirect('/{}'.format(user_name))
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

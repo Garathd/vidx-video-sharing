@@ -3,7 +3,7 @@
     <form action="{{ url_for('editplaylist') }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s12">
-                <input type="hidden" id="user_id" name="user_id" value="{{userid}}" type="text" class="validate">
+                <input type="hidden" id="playlist_id" name="playlist_id" value="{{ playlist.playlist_id }}" type="text" class="validate">
             </div>
         </div>
         <div class="row">
@@ -33,7 +33,6 @@
         <div class="row">
             <div class="input-field col s12">
                 <select name="category_id">
-                  <!--<option value="" disabled selected>Choose Option</option>-->
                   {% for cat in categories %}
                       {% if playlist.category_id == cat.category_id %}
                       <option selected value="{{cat.category_id}}">{{cat.category_name}}</option>
@@ -45,7 +44,7 @@
                 <label>Category</label>
             </div>
         </div>
-         <button autofocus class="waves-effect waves-light btn right play_button"><i class="material-icons right">send</i>Post</a>
+         <button autofocus class="waves-effect waves-light btn right play_button"><i class="material-icons right">save</i>Save</a>
     </form>
 </div>
 {% endblock %}
