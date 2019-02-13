@@ -109,8 +109,17 @@ def addplaylist():
             db.addPlaylist(userid, title, description, image, video, category)
         finally:
             return redirect('/{}'.format(user_name))
-        
-    return redirect('/{}'.format(user_name))
+    
+    
+@app.route('/delete/<playlistid>', methods=['GET','POST'])
+def delete(playlistid):
+    
+    try:
+        user_name = db.getLogin()
+        db.delete(playlistid)
+    finally:
+        return redirect('/{}'.format(user_name))
+    
     
 
 if __name__ == '__main__':

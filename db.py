@@ -69,7 +69,20 @@ def addPlaylist(userid, title, description, image, video, category):
     finally:
         db.close()
     
-    return result
+    
+def delete(playlistid):
+    
+    db =  database()
+    
+    sql = "DELETE FROM playlists WHERE playlist_id = {}".format(playlistid)
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(sql)
+            db.commit()
+    finally:
+        db.close()
+    
     
 # Get categories
 def getCategories():
