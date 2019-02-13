@@ -1,6 +1,6 @@
 {% extends 'base.html'%} {% block content %}
 <div class="row">
-    <form action="{{ url_for('addplaylist') }}" method="POST" class="col s12">
+    <form action="{{ url_for('editplaylist') }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s12">
                 <input type="hidden" id="user_id" name="user_id" value="{{userid}}" type="text" class="validate">
@@ -8,34 +8,38 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter video title" name="title" id="title" type="text" class="validate">
+                <input placeholder="Enter video title" value="{{ playlist.title }}" name="title" id="title" type="text" class="validate">
                 <label for="title">Title</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter video description" name="description" id="description" type="text" class="validate">
+                <input placeholder="Enter video description" value="{{ playlist.description }}" name="description" id="description" type="text" class="validate">
                 <label for="description">Description</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter image link address" name="image" id="image" type="text" class="validate">
+                <input placeholder="Enter image link address" value="{{ playlist.img_source }}" name="image" id="image" type="text" class="validate">
                 <label for="image">Image Link</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter video link address" name="video" id="video" type="text" class="validate">
+                <input placeholder="Enter video link address" value="{{ playlist.video_source }}" name="video" id="video" type="text" class="validate">
                 <label for="video">Video Link</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                 <select name="category_id">
-                  <option value="" disabled selected>Choose Option</option>
+                <select name="category_id">
+                  <!--<option value="" disabled selected>Choose Option</option>-->
                   {% for cat in categories %}
+                      {% if playlist.category_id == cat.category_id %}
+                      <option selected value="{{cat.category_id}}">{{cat.category_name}}</option>
+                      {% else %}
                       <option value="{{cat.category_id}}">{{cat.category_name}}</option>
+                      {% endif %}
                   {% endfor %}
                 </select>
                 <label>Category</label>

@@ -119,7 +119,34 @@ def delete(playlistid):
         db.delete(playlistid)
     finally:
         return redirect('/{}'.format(user_name))
+        
     
+@app.route('/edit/<playlistid>', methods=['GET','POST'])
+def edit(playlistid):
+    
+ 
+    user_name = db.getLogin()
+    categories = db.getCategories()
+    playlist = db.getPlaylistById(playlistid)
+        
+    # for play in playlist:
+            
+    #     title = play['title']
+    #     description = play['description']
+    #     img_source = play['img_source']
+    #     video_source = play['video_source']
+    #     category_id = play['category_id']
+        
+    # db.edit(playlistid, title, description, img_source, video_source, category_id)   
+        
+ 
+    return render_template('edit-playlist.html', playlist=playlist,categories=categories)
+    
+    
+@app.route('/edit-playlist', methods=['GET','POST'])
+def editplaylist():
+    
+    return("/")
     
 
 if __name__ == '__main__':

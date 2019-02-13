@@ -14,8 +14,8 @@
                     <a href="{{ playlist.video_source }}" target="_blank" class="waves-effect waves-light btn play_button"><i class="material-icons right">play_circle_filled</i>Watch</a>
                 </div>
                 <br />
-                <a href="/delete/{{ playlist.playlist_id }}"><i class="material-icons left">delete</i></a>
-                <a href="#" target="_blank"><i class="material-icons left">edit</i></a>
+                <a href="/delete/{{ playlist.playlist_id }}" alt="Delete"><i class="material-icons left">delete</i></a>
+                <a href="/edit/{{ playlist.playlist_id }}" alt="Edit"><i class="material-icons left">edit</i></a>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">{{ playlist.title }}<i class="material-icons right">close</i></span>

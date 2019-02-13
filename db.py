@@ -48,6 +48,25 @@ def getMyPlaylist(userid):
         
     return result
     
+
+def getPlaylistById(playlist_id):
+    
+    playlistid = int(playlist_id)
+    
+    db = database()
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+          sql = "SELECT * FROM playlists WHERE playlist_id = {}".format(playlistid)
+          cursor.execute(sql)
+          result = cursor.fetchone()
+    finally:
+        db.close()
+        
+    return result
+    
+    
+    
     
 def addPlaylist(userid, title, description, image, video, category):
     
@@ -83,6 +102,21 @@ def delete(playlistid):
     finally:
         db.close()
     
+    
+# def edit(playlistid, title, description, img_source, video_source, category_id):
+    
+#     db =  database()
+    
+#     sql = "UPDATE  playlists WHERE playlist_id = {}".format(playlistid)
+    
+#     try:
+#         with db.cursor(pymysql.cursors.DictCursor) as cursor:
+#             cursor.execute(sql)
+#             db.commit()
+#     finally:
+#         db.close()
+    
+#     db = database()
     
 # Get categories
 def getCategories():
