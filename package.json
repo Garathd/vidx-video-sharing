@@ -1,0 +1,13 @@
+{
+  "name": "social-video-playlists",
+  "description": "Video Playlists",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1"
+  }
+}

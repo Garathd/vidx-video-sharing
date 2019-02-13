@@ -1,0 +1,19 @@
+nav {
+    background-color: $background-color;
+}
+
+.card_button {
+    float: right;
+    margin-top: 2%;
+}
+
+.play_button {
+    background-color: $background-color !important;
+    color: #FFFFFF !important;
+}
+
+.play_button i {
+    font-size: 1.75rem;
+    line-height: inherit;
+    margin-top: -10%;
+}
