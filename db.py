@@ -150,15 +150,20 @@ def edit(playlistid, title, description, img_source, video_source, category_id):
         db.close()
         
 # Ordering Lists by category
-def orderByCategory(ordering, userid):
+def orderByCategory(ordering, userid, profile):
     
     category_id = ordering['category_id']
 
     db = database()
     
+    if profile == True:
+        sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {0} ORDER BY p.category_id = {1} DESC".format(userid,category_id)
+    else:
+        sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != {0} AND p.origin = 'true' ORDER BY p.category_id = {1} DESC".format(userid,category_id)
+    
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != {0} AND p.origin = 'true' ORDER BY p.category_id = {1} DESC".format(userid,category_id)
+          
           cursor.execute(sql)
           result = cursor.fetchall()
           

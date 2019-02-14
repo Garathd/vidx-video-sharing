@@ -63,8 +63,8 @@ def dashboard(username):
     return render_template('dashboard.html', username=username, playlists=playlists)
     
     
-@app.route('/home')
-def home():
+@app.route('/profile')
+def profile():
     
     try:
         user_name = db.getLogin()
@@ -193,13 +193,32 @@ def repost(playlistid):
 @app.route('/order-by/category/<category_name>')     
 def ordercategory(category_name):
     
+    profile = False
+    
     try:
         user_name = db.getLogin()
         userid = db.getUserId(user_name)
         category_id = db.getCategoryByName(category_name)
         
-        ordered = db.orderByCategory(category_id, userid)
+        ordered = db.orderByCategory(category_id, userid, profile)
         return render_template('videos.html',videos=ordered, username=user_name)
+
+    except Exception as e:
+        print("Exception: {}".format(e))
+        return redirect('/')
+        
+@app.route('/order-by/my-profile/category/<category_name>')     
+def orderprofilecategory(category_name):
+    
+    profile = True
+    
+    try:
+        user_name = db.getLogin()
+        userid = db.getUserId(user_name)
+        category_id = db.getCategoryByName(category_name)
+        
+        ordered = db.orderByCategory(category_id, userid, profile)
+        return render_template('dashboard.html', playlists=ordered, username=user_name)
 
     except Exception as e:
         print("Exception: {}".format(e))
