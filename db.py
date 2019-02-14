@@ -48,6 +48,21 @@ def getMyPlaylist(userid):
         
     return result
     
+def getOtherVideos(userid):
+    
+    db = database()
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != '{}' AND origin = 'true'".format(userid)
+          cursor.execute(sql)
+          result = cursor.fetchall()
+          
+    finally:
+        db.close()
+        
+    return result
+    
 
 def getPlaylistById(playlist_id):
     
@@ -66,9 +81,7 @@ def getPlaylistById(playlist_id):
     return result
     
     
-    
-    
-def addPlaylist(userid, title, description, image, video, category):
+def addPlaylist(userid, title, description, image, video, category, origin):
     
     db = database()
     
@@ -78,8 +91,9 @@ def addPlaylist(userid, title, description, image, video, category):
     video = video
     user_id = userid
     category_id = category
+    origin = origin
     
-    sql = "INSERT INTO playlists(user_id, title, description, img_source, video_source, category_id) VALUES ({0}, '{1}', '{2}','{3}', '{4}', {5})".format(user_id, title, description, image, video, category_id)
+    sql = "INSERT INTO playlists(user_id, title, description, img_source, video_source, category_id, origin) VALUES ({0}, '{1}', '{2}','{3}', '{4}', {5}, {6})".format(user_id, title, description, image, video, category_id, origin)
 
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
@@ -115,9 +129,7 @@ def edit(playlistid, title, description, img_source, video_source, category_id):
             db.commit()
     finally:
         db.close()
-    
-    db = database()
-    
+
 # Get categories
 def getCategories():
     
@@ -125,7 +137,7 @@ def getCategories():
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-            sql = "SELECT * FROM categories"
+            sql = "SELECT * FROM categories ORDER by category_name ASC"
             cursor.execute(sql)
             result = cursor.fetchall()
     finally:

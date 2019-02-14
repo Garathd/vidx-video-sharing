@@ -37,3 +37,9 @@ nav {
   font-size: 1.75rem;
   line-height: inherit;
   margin-top: -10%; }
+
+.up-vote {
+  color: green !important; }
+
+.down-vote {
+  color: red !important; }

@@ -73,6 +73,19 @@ def home():
     
     return redirect('/{}'.format(user_name))
     
+@app.route('/videos')
+def videos():
+    
+    try:
+        user_name = db.getLogin()
+        userid = db.getUserId(user_name)
+        videos = db.getOtherVideos(userid)
+
+    except Exception as e:
+        print("Exception: {}".format(e))
+        return redirect('/')
+    
+    return render_template('videos.html',videos=videos, username=user_name)
     
 @app.route('/new-playlist')
 def newplaylist():
@@ -90,6 +103,9 @@ def newplaylist():
 @app.route('/add-playlist', methods=['GET','POST'])
 def addplaylist():
     
+    # Original Poster
+    origin = "true"
+    
     try:
         user_name = db.getLogin()
     except: 
@@ -105,8 +121,9 @@ def addplaylist():
         video = form['video']
         category = form['category_id']
         
+        
         try:
-            db.addPlaylist(userid, title, description, image, video, category)
+            db.addPlaylist(userid, title, description, image, video, category, origin)
         finally:
             return redirect('/{}'.format(user_name))
     
@@ -129,6 +146,49 @@ def edit(playlistid):
     playlist = db.getPlaylistById(playlistid)
         
     return render_template('edit-playlist.html', playlist=playlist,categories=categories)
+    
+@app.route('/downvote/<playlistid>')
+def downvote(playlistid):
+    
+    user_name = db.getLogin()
+    categories = db.getCategories()
+    playlist = db.getPlaylistById(playlistid)
+        
+    return redirect('/{}'.format(user_name))
+    
+@app.route('/upvote/<playlistid>')
+def upvote(playlistid):
+    
+    user_name = db.getLogin()
+    categories = db.getCategories()
+    playlist = db.getPlaylistById(playlistid)
+        
+    return redirect('/{}'.format(user_name))
+    
+    
+@app.route('/repost/<playlistid>')
+def repost(playlistid):
+    
+    # Not Original Post
+    origin = "false"
+    
+    try:
+        user_name = db.getLogin()
+        userid = db.getUserId(user_name)
+        playlist = db.getPlaylistById(playlistid)
+        
+        title = playlist['title']
+        description = playlist['description']
+        img_source = playlist['img_source']
+        video_source = playlist['video_source']
+        category_id = playlist['category_id']
+        
+        db.addPlaylist(userid, title, description, img_source, video_source, category_id, origin)
+        
+        
+    finally:
+        return redirect('/{}'.format(user_name))
+        
     
     
 @app.route('/edit-playlist', methods=['GET','POST'])

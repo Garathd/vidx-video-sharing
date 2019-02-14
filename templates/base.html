@@ -16,11 +16,13 @@
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('videos') }}">Videos</a></li>
                     <li><a href="{{ url_for('newplaylist') }}">New Playlist</a></li>
                     <li><a href="{{ url_for('index') }}">Logout {{ username }}</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li><a href="#">Home</a></li>
+                    <li><a href="{{ url_for('videos') }}">Videos</a></li>
                     <li><a href="#">New Playlist</a></li>
                     <li><a href="{{ url_for('index') }}">Logout {{ username }}</a></li>
                 </ul>
