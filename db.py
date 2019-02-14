@@ -7,6 +7,18 @@ password = ''
 # Check if the user is logged in
 user_name = ''
 
+
+# Set Login Name
+def setLogin(value):
+    global user_name
+    user_name = value
+    
+    
+# Get Login Name    
+def getLogin():
+    return user_name
+    
+
 # Database Connection
 def database():
     connection = pymysql.connect(
@@ -16,7 +28,7 @@ def database():
         db='milestoneProject4')
     return connection
     
-  
+    
 # Get User ID    
 def getUserId(username):
     
@@ -33,6 +45,7 @@ def getUserId(username):
         
     return value
     
+    
 # Get Playlist   
 def getMyPlaylist(userid):
     
@@ -48,6 +61,8 @@ def getMyPlaylist(userid):
         
     return result
     
+    
+# Get Other Videos    
 def getOtherVideos(userid):
     
     db = database()
@@ -63,7 +78,8 @@ def getOtherVideos(userid):
         
     return result
     
-
+    
+# Get Playlist By ID
 def getPlaylistById(playlist_id):
     
     playlistid = int(playlist_id)
@@ -81,6 +97,7 @@ def getPlaylistById(playlist_id):
     return result
     
     
+# Add a playlist    
 def addPlaylist(userid, title, description, image, video, category, origin):
     
     db = database()
@@ -101,8 +118,9 @@ def addPlaylist(userid, title, description, image, video, category, origin):
             db.commit()
     finally:
         db.close()
+        
     
-    
+# Delete a playlist    
 def delete(playlistid):
     
     db =  database()
@@ -117,6 +135,7 @@ def delete(playlistid):
         db.close()
     
     
+# Edit a playlist    
 def edit(playlistid, title, description, img_source, video_source, category_id):
     
     db =  database()
@@ -129,6 +148,41 @@ def edit(playlistid, title, description, img_source, video_source, category_id):
             db.commit()
     finally:
         db.close()
+        
+# Ordering Lists by category
+def orderByCategory(ordering, userid):
+    
+    category_id = ordering['category_id']
+
+    db = database()
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != {0} AND p.origin = 'true' ORDER BY p.category_id = {1} DESC".format(userid,category_id)
+          cursor.execute(sql)
+          result = cursor.fetchall()
+          
+    finally:
+        db.close()
+        
+    return result
+    
+# Ordering Lists by user
+def orderByUser(users_id, my_id):
+    
+    db = database()
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != {0} AND p.origin = 'true' ORDER BY p.user_id = {1} DESC".format(my_id,users_id)
+          cursor.execute(sql)
+          result = cursor.fetchall()
+          
+    finally:
+        db.close()
+        
+    return result
+        
 
 # Get categories
 def getCategories():
@@ -144,14 +198,20 @@ def getCategories():
         db.close()
     
     return result
-
-# Set Login Name
-def setLogin(value):
-    global user_name
-    user_name = value
     
+# Get categories by name
+def getCategoryByName(category_name):
     
-# Get Login Name    
-def getLogin():
-    return user_name
+    db = database()
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            sql = "SELECT category_id FROM categories WHERE category_name = '{0}'".format(category_name)
+            cursor.execute(sql)
+            result = cursor.fetchone()
+    finally:
+        db.close()
+    
+    return result
+    
     

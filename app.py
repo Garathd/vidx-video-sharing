@@ -190,6 +190,37 @@ def repost(playlistid):
         return redirect('/{}'.format(user_name))
         
     
+@app.route('/order-by/category/<category_name>')     
+def ordercategory(category_name):
+    
+    try:
+        user_name = db.getLogin()
+        userid = db.getUserId(user_name)
+        category_id = db.getCategoryByName(category_name)
+        
+        ordered = db.orderByCategory(category_id, userid)
+        return render_template('videos.html',videos=ordered, username=user_name)
+
+    except Exception as e:
+        print("Exception: {}".format(e))
+        return redirect('/')
+        
+        
+@app.route('/order-by/user/<user_name>')     
+def orderuser(user_name):
+    
+    try:
+        my_username = db.getLogin()
+        my_id = db.getUserId(my_username)
+        users_id = db.getUserId(user_name)
+
+        ordered = db.orderByUser(users_id, my_id)
+        return render_template('videos.html',videos=ordered, username=my_username)
+
+    except Exception as e:
+        print("Exception: {}".format(e))
+        return redirect('/')
+        
     
 @app.route('/edit-playlist', methods=['GET','POST'])
 def editplaylist():
