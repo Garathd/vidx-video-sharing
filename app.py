@@ -1,14 +1,19 @@
 import os
 import pymysql
 import db
+# import jinja2.environment
+# from jinja2 import Environment
+
 from flask import Flask, render_template, request, redirect
-from jinja2.ext import loopcontrols
+from jinja2.ext import loopcontrols, Extension
 
 app = Flask(__name__)
 
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
-app.jinja_env.globals.update(get_votes=db.calcVotes)
+#app.jinja_env.globals['get_votes'] = db.calcVotes
+app.jinja_env.globals['check_voted'] = db.checkVote
+
 
 @app.route('/')
 def index():
@@ -84,13 +89,18 @@ def feed():
         user_name = db.getLogin()
         userid = db.getUserId(user_name)
         videos = db.getOtherVideos(userid)
-        votes = db.getVotes()
+        votes = db.getAllVotes()
 
     except Exception as e:
         print("Exception: {}".format(e))
         return redirect('/')
     
-    return render_template('videos.html',videos=videos, username=user_name, votes=votes)
+    return render_template('videos.html',
+    videos=videos,
+    username=user_name,
+    votes=votes,
+    userid=userid,
+    get_votes=db.calcVotes)
     
 @app.route('/new-playlist')
 def newplaylist():
@@ -214,30 +224,38 @@ def ordercategory(category_name):
         user_name = db.getLogin()
         userid = db.getUserId(user_name)
         category_id = db.getCategoryByName(category_name)
-        
+        votes = db.getAllVotes()
+
         ordered = db.orderByCategory(category_id, userid, profile)
-        return render_template('videos.html',videos=ordered, username=user_name)
+        return render_template('videos.html',
+        videos=ordered, 
+        username=user_name,
+        votes=votes,
+        userid=userid,
+        get_votes=db.calcVotes)
 
     except Exception as e:
         print("Exception: {}".format(e))
-        return redirect('/')
+        # return redirect('/')
+        return
         
 @app.route('/order-by/my-profile/category/<category_name>')     
 def orderprofilecategory(category_name):
     
-    profile = True
+    profile = False
     
     try:
         user_name = db.getLogin()
         userid = db.getUserId(user_name)
         category_id = db.getCategoryByName(category_name)
-        
-        ordered = db.orderByCategory(category_id, userid, profile)
-        return render_template('dashboard.html', playlists=ordered, username=user_name)
 
     except Exception as e:
         print("Exception: {}".format(e))
         return redirect('/')
+        
+    finally:
+         ordered = db.orderByCategory(category_id, userid, profile)
+         return render_template('dashboard.html', playlists=ordered, username=user_name)
         
         
 @app.route('/order-by/user/<user_name>')     
@@ -247,13 +265,21 @@ def orderuser(user_name):
         my_username = db.getLogin()
         my_id = db.getUserId(my_username)
         users_id = db.getUserId(user_name)
-
-        ordered = db.orderByUser(users_id, my_id)
-        return render_template('videos.html',videos=ordered, username=my_username)
+        votes = db.getAllVotes()
 
     except Exception as e:
         print("Exception: {}".format(e))
-        return redirect('/')
+        # return redirect('/')
+        return
+    
+    finally:
+        ordered = db.orderByUser(users_id, my_id)
+        return render_template('videos.html',
+        videos=ordered, 
+        username=my_username,
+        votes=votes,
+        userid=my_id,
+        get_votes=db.calcVotes)
         
     
 @app.route('/edit-playlist', methods=['GET','POST'])

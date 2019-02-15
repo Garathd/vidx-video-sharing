@@ -16,12 +16,24 @@
                 </div>
                 <br />
                 <a href="/repost/{{ video.playlist_id }}" alt="Repost"><i class="material-icons">save</i></a>
+                {% set voted = check_voted(userid, video.playlist_id) %}
+                {% if voted == 0 %}
                 <a href="/downvote/{{ video.playlist_id }}" alt="DownVote"><i class="down-vote material-icons">arrow_downward</i></a>
                 <a href="/upvote/{{ video.playlist_id }}" alt="UpVote"><i class="up-vote material-icons">arrow_upward</i></a>
+               
+                {% else %}
+                    {% if voted == 1 %}
+                    <i class="up-vote material-icons">arrow_upward</i>
+                    {% else %}
+                    <i class="done-vote material-icons">arrow_down</i>
+                    {% endif %}
+                {% endif %}
                 <hr />
+                {% set total = 0 %}
                 {% for vote in votes %} 
                 {% if vote.playlist_id == video.playlist_id %}
-                <p class="left"><strong>Votes: </strong>{{ get_votes(video.playlist_id) }}</p>
+                {% set total = (total + get_votes(vote.playlist_id)) %}
+                <p class="left"><strong>Votes: </strong>{{ total }}</p>
                 {% break %}
                 {% endif %} {% endfor %}
                 <p class="right"><strong>Posted By: </strong><a href="/order-by/user/{{ video.username }}">{{ video.username }}</a></p>
