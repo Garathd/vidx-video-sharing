@@ -19,6 +19,11 @@
                 <a href="/downvote/{{ video.playlist_id }}" alt="DownVote"><i class="down-vote material-icons">arrow_downward</i></a>
                 <a href="/upvote/{{ video.playlist_id }}" alt="UpVote"><i class="up-vote material-icons">arrow_upward</i></a>
                 <hr />
+                {% for vote in votes %} 
+                {% if vote.playlist_id == video.playlist_id %}
+                <p class="left"><strong>Votes: </strong>{{ get_votes(video.playlist_id) }}</p>
+                {% break %}
+                {% endif %} {% endfor %}
                 <p class="right"><strong>Posted By: </strong><a href="/order-by/user/{{ video.username }}">{{ video.username }}</a></p>
             </div>
             <div class="card-reveal">

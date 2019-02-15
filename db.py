@@ -220,3 +220,49 @@ def getCategoryByName(category_name):
     return result
     
     
+# Get votes
+def getVotes():
+    
+    db = database()
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            sql = "SELECT * FROM votes"
+            cursor.execute(sql)
+            result = cursor.fetchall()
+    finally:
+        db.close()
+    
+    return result    
+    
+def calcVotes(playlist_id):
+    
+    db = database()
+    
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            sql = "SELECT sum(vote) as count FROM votes WHERE playlist_id = {}".format(playlist_id)
+            cursor.execute(sql)
+            result = cursor.fetchone()
+            return result['count']
+    finally:
+        db.close()
+    
+# Voting
+def vote(playlist_id, user_id, result):
+    
+    db = database()
+
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            sql = "INSERT INTO votes(playlist_id, user_id, vote) VALUES ({0}, {1}, '{2}')".format(playlist_id, user_id, result)
+            cursor.execute(sql)
+            db.commit()
+    except Exception as e:
+        print("Exception: {}".format(e))
+    
+    finally:
+        db.close()
+        
+    
+    

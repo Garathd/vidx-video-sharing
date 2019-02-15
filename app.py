@@ -2,9 +2,13 @@ import os
 import pymysql
 import db
 from flask import Flask, render_template, request, redirect
+from jinja2.ext import loopcontrols
 
 app = Flask(__name__)
 
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
+
+app.jinja_env.globals.update(get_votes=db.calcVotes)
 
 @app.route('/')
 def index():
@@ -37,7 +41,7 @@ def check():
                 
                 user_name = db.getLogin()
                 
-                return redirect('/{}'.format(username))
+                return redirect('/feed')
           
           else:
               return render_template('login.html')
@@ -73,19 +77,20 @@ def profile():
     
     return redirect('/{}'.format(user_name))
     
-@app.route('/videos')
-def videos():
+@app.route('/feed')
+def feed():
     
     try:
         user_name = db.getLogin()
         userid = db.getUserId(user_name)
         videos = db.getOtherVideos(userid)
+        votes = db.getVotes()
 
     except Exception as e:
         print("Exception: {}".format(e))
         return redirect('/')
     
-    return render_template('videos.html',videos=videos, username=user_name)
+    return render_template('videos.html',videos=videos, username=user_name, votes=votes)
     
 @app.route('/new-playlist')
 def newplaylist():
@@ -150,20 +155,30 @@ def edit(playlistid):
 @app.route('/downvote/<playlistid>')
 def downvote(playlistid):
     
-    user_name = db.getLogin()
-    categories = db.getCategories()
-    playlist = db.getPlaylistById(playlistid)
-        
-    return redirect('/{}'.format(user_name))
+    vote = -1
+    
+    try:
+        user_name = db.getLogin()
+        userid = db.getUserId(user_name)
+        db.vote(playlistid, userid, vote)
+    except: 
+        redirect('/')   
+    finally:
+        return redirect('/feed')
     
 @app.route('/upvote/<playlistid>')
 def upvote(playlistid):
     
-    user_name = db.getLogin()
-    categories = db.getCategories()
-    playlist = db.getPlaylistById(playlistid)
-        
-    return redirect('/{}'.format(user_name))
+    vote = 1
+    
+    try:
+        user_name = db.getLogin()
+        userid = db.getUserId(user_name)
+        db.vote(playlistid, userid, vote)
+    except: 
+        redirect('/')   
+    finally:
+        return redirect('/feed')
     
     
 @app.route('/repost/<playlistid>')
