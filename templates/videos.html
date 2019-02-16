@@ -1,7 +1,7 @@
 {% extends 'base.html'%} {% block content %}
 <div class="row">
     {% for video in videos %}
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-12">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ video.img_source }}">
@@ -10,7 +10,6 @@
                 <span class="card-title activator grey-text text-darken-4">{{ video.title }}<i class="material-icons right">more_vert</i></span>
                 <hr />
                 <p><strong>Category: </strong><a href="/order-by/category/{{ video.category_name }}">{{ video.category_name }}</a></p>
-                <br />
                 <div class="card_button">
                     <a href="{{ video.video_source }}" target="_blank" class="waves-effect waves-light btn play_button"><i class="material-icons right">play_circle_filled</i>Watch</a>
                 </div>
@@ -20,7 +19,6 @@
                 {% if voted == 0 %}
                 <a href="/downvote/{{ video.playlist_id }}" alt="DownVote"><i class="down-vote material-icons">arrow_downward</i></a>
                 <a href="/upvote/{{ video.playlist_id }}" alt="UpVote"><i class="up-vote material-icons">arrow_upward</i></a>
-               
                 {% else %}
                     {% if voted == 1 %}
                     <i class="up-vote material-icons">arrow_upward</i>

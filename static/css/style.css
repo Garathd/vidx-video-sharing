@@ -29,6 +29,10 @@ nav {
   float: right;
   margin-top: 2%; }
 
+.seperate {
+  clear: both !important;
+  margin: 2%; }
+
 .play_button {
   background-color: #3f51b5 !important;
   color: #FFFFFF !important; }
@@ -37,6 +41,9 @@ nav {
   font-size: 1.75rem;
   line-height: inherit;
   margin-top: -10%; }
+
+.home-post-footer {
+  margin-top: 1.5%; }
 
 .up-vote {
   color: green !important; }

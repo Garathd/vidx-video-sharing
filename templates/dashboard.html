@@ -1,14 +1,14 @@
 {% extends 'base.html'%} {% block content %}
 <div class="row">
     {% for playlist in playlists %}
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-12">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ playlist.img_source }}">
             </div>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{ playlist.title }}<i class="material-icons right">more_vert</i></span>
-                <hr />
+                <hr>
                 <p><strong>Category: </strong><a href="/order-by/my-profile/category/{{ playlist.category_name }}">{{ playlist.category_name }}</a></p>
                 <div class="card_button">
                     <a href="{{ playlist.video_source }}" target="_blank" class="waves-effect waves-light btn play_button"><i class="material-icons right">play_circle_filled</i>Watch</a>
@@ -16,6 +16,23 @@
                 <br />
                 <a href="/delete/{{ playlist.playlist_id }}" alt="Delete"><i class="material-icons left">delete</i></a>
                 <a href="/edit/{{ playlist.playlist_id }}" alt="Edit"><i class="material-icons left">edit</i></a>
+                &nbsp;
+                <hr>
+                <div class="post-footer">
+                {% set total = 0 %}
+                {% for vote in votes %} 
+                {% if vote.playlist_id == playlist.playlist_id %}
+                {% set total = (total + get_votes(vote.playlist_id)) %}
+                <p class="left"><strong>Votes: </strong>{{ total }}</p>
+                {% break %}
+                {% endif %} 
+                {% endfor %}
+                {% if playlist.origin == 'false' %}
+                <p class="right"><strong>Status: </strong><a href="/order-by/my-profile/saved/1" alt="reposted">Reposted</a></p>
+                {% else %}
+                <p class="right"><strong>Status: </strong><a href="/order-by/my-profile/saved/0" alt="original">Original</a></p>
+                {% endif %}
+                </div>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">{{ playlist.title }}<i class="material-icons right">close</i></span>
