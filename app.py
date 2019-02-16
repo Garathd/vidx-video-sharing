@@ -13,6 +13,27 @@ app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 def index():
     return render_template('login.html')
     
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/register-user/', methods=['GET','POST'])
+def regcheck():
+    
+    if request.method == 'POST':
+        form = request.form
+        username = form['username']
+        password = form['password']
+        
+        try:
+           db.register(username,password)
+            
+        except Exception as e:
+            print(e)
+
+        finally:
+            return render_template('login.html')
+            
     
 @app.route('/check-user/', methods=['GET','POST'])
 def check():

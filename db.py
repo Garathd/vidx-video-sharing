@@ -28,6 +28,23 @@ def database():
     return connection
     
     
+# Register User
+def register(username, password):
+    
+    db = database()
+    
+    sql = "INSERT INTO users(username, password) VALUES ('{0}', '{1}')".format(username, password)
+
+    try:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(sql)
+            db.commit()
+        
+    finally:
+        db.close()
+        
+    return
+
 # Authenticate User
 def authenticate(username, password):
     
@@ -136,7 +153,7 @@ def addPlaylist(user_id, title, description, image, video, category_id, origin):
     
     db = database()
     
-    sql = "INSERT INTO playlists(user_id, title, description, img_source, video_source, category_id, origin) VALUES ({0}, '{1}', '{2}','{3}', '{4}', {5}, {6})".format(user_id, title, description, image, video, category_id, origin)
+    sql = "INSERT INTO playlists(user_id, title, description, img_source, video_source, category_id, origin) VALUES ({0}, '{1}', '{2}','{3}', '{4}', {5}, '{6}')".format(user_id, title, description, image, video, category_id, origin)
 
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
