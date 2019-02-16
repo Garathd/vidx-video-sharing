@@ -2,12 +2,17 @@ nav {
     background-color: $background-color;
 }
 
+nav ul a:hover {
+    background-color: #FFF !important;
+    text-decoration: none !important;
+}
+
 .card_button {
     float: right;
     margin-top: 2%;
 }
 
-.seperate{
+.seperate {
     clear: both !important;
     margin: 2%;
 }
@@ -23,6 +28,6 @@ nav {
     margin-top: -10%;
 }
 
-.home-post-footer{
+.home-post-footer {
     margin-top: 1.5%;
 }
