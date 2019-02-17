@@ -1,6 +1,7 @@
 import os
 import pymysql
 
+# Default Database Credentials
 user = os.getenv('C9_USER')
 password = ''
 
@@ -28,7 +29,7 @@ def database():
     return connection
     
     
-# Register User
+# Register user to database
 def register(username, password):
     
     db = database()
@@ -43,7 +44,6 @@ def register(username, password):
     finally:
         db.close()
         
-    return
 
 # Authenticate User
 def authenticate(username, password):
@@ -78,7 +78,7 @@ def getUserId(username):
           value = str(result[0])
     
     except Exception as e:
-        print("getUser: {}".format(e))      
+        print("getUserId: {}".format(e))      
           
     finally:
         db.close()
@@ -86,7 +86,7 @@ def getUserId(username):
     return value
     
     
-# Get Playlist   
+# Get My Videos   
 def getMyPlaylist(userid):
     
     db = database()
@@ -106,7 +106,7 @@ def getMyPlaylist(userid):
     return result
     
     
-# Get Other Videos    
+# Get Other Users Videos    
 def getOtherVideos(userid):
     
     db = database()
@@ -148,7 +148,7 @@ def getPlaylistById(playlist_id):
     return result
     
     
-# Add a playlist    
+# Add a new video    
 def addPlaylist(user_id, title, description, image, video, category_id, origin):
     
     db = database()
@@ -167,7 +167,7 @@ def addPlaylist(user_id, title, description, image, video, category_id, origin):
         db.close()
         
     
-# Delete a playlist    
+# Delete a video    
 def delete(playlistid):
     
     db =  database()
@@ -186,7 +186,7 @@ def delete(playlistid):
         db.close()
     
     
-# Edit a playlist    
+# Edit a video    
 def edit(playlistid, title, description, img_source, video_source, category_id):
     
     db =  database()
@@ -205,13 +205,14 @@ def edit(playlistid, title, description, img_source, video_source, category_id):
         db.close()
         
 
-# Ordering Lists by category
+# Ordering Videos by category
 def orderByCategory(ordering, userid, profile):
     
     category_id = ordering['category_id']
 
     db = database()
     
+    # If its my profile show my video list otherwise show peoples original videos
     if profile == True:
         sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {0} ORDER BY p.category_id = {1} DESC".format(userid,category_id)
     else:
@@ -219,7 +220,6 @@ def orderByCategory(ordering, userid, profile):
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          
           cursor.execute(sql)
           result = cursor.fetchall()
           
@@ -231,21 +231,19 @@ def orderByCategory(ordering, userid, profile):
         
     return result
     
-# Ordering Lists by saved or original posts
+# Ordering my videos by reposted or original posts
 def orderBySaved(userid, saved):
     
     db = database()
     
+    # Checking if the video is an original or a repost
     if int(saved) == 1:
-        print("True")
         sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {} ORDER BY p.origin='false' DESC".format(userid)
     else:
-        print("False")
         sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {} ORDER BY p.origin='true' DESC".format(userid)
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          
           cursor.execute(sql)
           result = cursor.fetchall()
           
@@ -257,7 +255,8 @@ def orderBySaved(userid, saved):
         
     return result    
     
-# Ordering Lists by user
+    
+# Ordering Feed videos by username
 def orderByUser(users_id, my_id):
     
     db = database()
@@ -277,7 +276,7 @@ def orderByUser(users_id, my_id):
     return result
         
 
-# Get categories
+# Get the list of video categories
 def getCategories():
     
     db = database()
@@ -296,7 +295,8 @@ def getCategories():
     
     return result
     
-# Get categories by name
+    
+# Get categories information
 def getCategoryByName(category_name):
     
     db = database()
@@ -316,7 +316,7 @@ def getCategoryByName(category_name):
     return result
     
     
-# Get all votes
+# Get all the voting information of the videos
 def getAllVotes():
     
     db = database()
@@ -334,8 +334,9 @@ def getAllVotes():
         db.close()
     
     return result    
-
-# Check if user voted    
+    
+    
+# Check if a user has voted on a specific playlist
 def checkVote(user_id, playlist_id):
     
     db = database()
@@ -355,7 +356,8 @@ def checkVote(user_id, playlist_id):
     
     return result
     
-    
+
+# Calculate to the total amount of votes of a video    
 def calcVotes(playlist_id):
     
     db = database()
@@ -373,7 +375,8 @@ def calcVotes(playlist_id):
     finally:
         db.close()
     
-# Voting
+    
+# Register a vote for a video
 def vote(playlist_id, user_id, result):
     
     db = database()
@@ -389,6 +392,3 @@ def vote(playlist_id, user_id, result):
     
     finally:
         db.close()
-
-
-    
