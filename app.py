@@ -430,8 +430,7 @@ def orderuser(user_name):
         userid=my_id,
         get_votes=db.calcVotes,
         check_voted=db.checkVote)
-        
-        
+
 # Edit videos
 @app.route('/edit-playlist', methods=['GET','POST'])
 def editplaylist():
