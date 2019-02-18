@@ -1,6 +1,6 @@
 {% extends 'base.html'%} {% block content %}
 <div class="row">
-    <form action="{{ url_for('addplaylist') }}" method="POST" class="col s12">
+    <form action="/add-playlist" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s12">
                 <input type="hidden" id="user_id" name="user_id" value="{{userid}}" type="text" class="validate">

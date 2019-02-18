@@ -4,10 +4,6 @@ This project is inspired by the short comings of Social Media Platforms. It is e
 
 (NB) Yet to incorporate the automatic deleting of profiles and videos. (Last Major Code Change)
 
-## Bugs
-
-*app.jinja_env.add_extension('jinja2.ext.loopcontrols')*
-
 ## UX
 
 ## Design
