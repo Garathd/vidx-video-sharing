@@ -250,7 +250,6 @@ def downvote(playlistid):
     # This deletes a video if it has a total score of -5
     if total_votes > -4:
         try:
-            print("Is higher than minus 4")
             # Getting username
             user_name = db.getLogin()
             
@@ -266,7 +265,6 @@ def downvote(playlistid):
         
        
     else:
-         print("Is lower or equal to minus 4")
          db.delete(playlistid)
          return redirect('/feed')
  

@@ -113,7 +113,7 @@ CREATE TABLE `votes` (
   PRIMARY KEY (`vote_id`),
   KEY `playlist_id` (`playlist_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`playlist_id`) ON DELETE CASCADE,
+  CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`playlist_id`),
   CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
