@@ -7,11 +7,14 @@ from jinja2.ext import Extension, loopcontrols
 
 app = Flask(__name__)
 
+
+# Adding Jinja Environment so I can use Jinja Extensions
 app.jinja_env = Environment(
     loader=PackageLoader('app', 'templates'),
     autoescape=select_autoescape(['html', 'xml'])
 )
 
+# Adding Jinja Loop Controls Extension
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 # Login Page
@@ -235,19 +238,37 @@ def downvote(playlistid):
     # Set vote value
     vote = -1
     
-    try:
-        # Getting username
-        user_name = db.getLogin()
+    # Calculating the votes for video
+    total_votes = int(db.calcVotes(playlistid))
+    
+    if total_votes == None:
+        total_votes = 0
+    
+    print("total_votes: {}".format(total_votes))
+    
+
+    # This deletes a video if it has a total score of -5
+    if total_votes > -4:
+        try:
+            print("Is higher than minus 4")
+            # Getting username
+            user_name = db.getLogin()
+            
+            # Getting user id
+            userid = db.getUserId(user_name)
+            
+            # Make vote
+            db.vote(playlistid, userid, vote)
+        except: 
+            redirect('/')   
+        finally:
+            return redirect('/feed')
         
-        # Getting user id
-        userid = db.getUserId(user_name)
-        
-        # Make vote
-        db.vote(playlistid, userid, vote)
-    except: 
-        redirect('/')   
-    finally:
-        return redirect('/feed')
+       
+    else:
+         print("Is lower or equal to minus 4")
+         db.delete(playlistid)
+         return redirect('/feed')
  
 # Up vote    
 @app.route('/upvote/<playlistid>')
