@@ -50,7 +50,7 @@ def local():
     
   
 # This is for setting either a local or remote database   
-database = local    
+database = remote    
 
     
 """
