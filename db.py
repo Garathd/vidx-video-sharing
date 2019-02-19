@@ -18,15 +18,25 @@ def setLogin(value):
 def getLogin():
     return user_name
     
-
-# Database Connection
+    
+# ClearDB Database Connection
 def database():
     connection = pymysql.connect(
-        host='localhost',
-        user=user,
-        password=password,
-        db='milestoneProject4')
+        host="f364db5b@eu-cdbr-west-02.cleardb.net",
+        user="b8c9433415b668",
+        password="f364db5b",
+        db="heroku_acb2a7f13c05325")
     return connection
+        
+
+# # Local Database Connection
+# def database():
+#     connection = pymysql.connect(
+#         host='localhost',
+#         user=user,
+#         password=password,
+#         db='milestoneProject4')
+#     return connection
     
     
 # Register user to database
