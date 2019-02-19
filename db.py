@@ -1,26 +1,34 @@
 import os
 import pymysql
+import auth
 
-# Default Database Credentials
+# Local Database Credentials
 user = os.getenv('C9_USER')
 password = ''
 
-# Check if the user is logged in
+# Init Username
 user_name = ''
 
-# Set Login Name
+
+"""
+Set Login Name
+"""
 def setLogin(value):
     global user_name
     user_name = value
     
     
-# Get Login Name    
+"""
+Get Login Name
+"""
 def getLogin():
     return user_name
     
     
-# ClearDB Database Connection
-def database():
+"""
+ClearDB Database Connection
+"""
+def remote():
     connection = pymysql.connect(
         host="eu-cdbr-west-02.cleardb.net",
         user="b8c9433415b668",
@@ -29,17 +37,25 @@ def database():
     return connection
         
 
-# # Local Database Connection
-# def database():
-#     connection = pymysql.connect(
-#         host='localhost',
-#         user=user,
-#         password=password,
-#         db='milestoneProject4')
-#     return connection
+"""
+Local Database Connection
+"""
+def local():
+    connection = pymysql.connect(
+        host='localhost',
+        user=user,
+        password=password,
+        db='milestoneProject4')
+    return connection
     
+  
+# This is for setting either a local or remote database   
+database = local    
+
     
-# Register user to database
+"""
+Register user to database
+"""
 def register(username, password):
     
     db = database()
@@ -50,12 +66,17 @@ def register(username, password):
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
             cursor.execute(sql)
             db.commit()
+            
+    except Exception as e:
+        print(e)
         
     finally:
         db.close()
         
-
-# Authenticate User
+        
+"""
+Authenticate User
+"""
 def authenticate(username, password):
     
     db = database()
@@ -67,7 +88,7 @@ def authenticate(username, password):
           result = cursor.fetchone()
           
     except Exception as e:
-        print("auth: {}".format(e))
+        print(e)
         
     finally:
         db.close()
@@ -75,7 +96,9 @@ def authenticate(username, password):
     return result
     
     
-# Get User ID    
+"""
+Get User ID
+"""
 def getUserId(username):
     
     db = database()
@@ -88,7 +111,7 @@ def getUserId(username):
           value = str(result[0])
     
     except Exception as e:
-        print("getUserId: {}".format(e))      
+        print(e)      
           
     finally:
         db.close()
@@ -96,7 +119,9 @@ def getUserId(username):
     return value
     
     
-# Get My Videos   
+"""
+Get My Videos
+"""
 def getMyPlaylist(userid):
     
     db = database()
@@ -108,7 +133,7 @@ def getMyPlaylist(userid):
           result = cursor.fetchall()
           
     except Exception as e:
-        print("getMyPlaylist: {}".format(e))      
+        print(e)   
           
     finally:
         db.close()
@@ -116,7 +141,9 @@ def getMyPlaylist(userid):
     return result
     
     
-# Get Other Users Videos    
+"""
+Get Other Users Videos 
+"""
 def getOtherVideos(userid):
     
     db = database()
@@ -128,7 +155,7 @@ def getOtherVideos(userid):
           result = cursor.fetchall()
           
     except Exception as e:
-        print("getOtherVideos: {}".format(e))      
+        print(e)     
           
     finally:
         db.close()
@@ -136,7 +163,9 @@ def getOtherVideos(userid):
     return result
     
     
-# Get Playlist By ID
+"""
+Get Playlist By ID
+"""
 def getPlaylistById(playlist_id):
     
     playlistid = int(playlist_id)
@@ -150,7 +179,7 @@ def getPlaylistById(playlist_id):
           result = cursor.fetchone()
           
     except Exception as e:
-        print("getPlaylistById: {}".format(e))      
+        print(e)    
           
     finally:
         db.close()
@@ -158,7 +187,9 @@ def getPlaylistById(playlist_id):
     return result
     
     
-# Add a new video    
+"""
+Add a new video 
+"""
 def addPlaylist(user_id, title, description, image, video, category_id, origin):
     
     db = database()
@@ -171,13 +202,15 @@ def addPlaylist(user_id, title, description, image, video, category_id, origin):
             db.commit()
     
     except Exception as e:
-        print("addPlaylist: {}".format(e))        
+        print(e)       
             
     finally:
         db.close()
         
     
-# Delete a video    
+"""
+Delete a video   
+"""
 def delete(playlistid):
     
     db =  database()
@@ -190,13 +223,15 @@ def delete(playlistid):
             db.commit()
     
     except Exception as e:
-        print("delete: {}".format(e))        
+        print(e)       
             
     finally:
         db.close()
     
     
-# Edit a video    
+"""
+Edit a video
+"""
 def edit(playlistid, title, description, img_source, video_source, category_id):
     
     db =  database()
@@ -209,20 +244,22 @@ def edit(playlistid, title, description, img_source, video_source, category_id):
             db.commit()
             
     except Exception as e:
-        print("edit: {}".format(e))        
+        print(e)        
             
     finally:
         db.close()
         
 
-# Ordering Videos by category
+"""
+Ordering videos by category
+"""
 def orderByCategory(ordering, userid, profile):
     
     category_id = ordering['category_id']
 
     db = database()
     
-    # If its my profile show my video list otherwise show peoples original videos
+    # If it's my profile show my video list otherwise show peoples original videos
     if profile == True:
         sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {0} ORDER BY p.category_id = {1} DESC".format(userid,category_id)
     else:
@@ -234,14 +271,17 @@ def orderByCategory(ordering, userid, profile):
           result = cursor.fetchall()
           
     except Exception as e:
-        print("orderByCategory: {}".format(e))      
+        print(e)    
           
     finally:
         db.close()
         
     return result
     
-# Ordering my videos by reposted or original posts
+    
+"""
+Ordering my videos by reposted or original posts
+"""
 def orderBySaved(userid, saved):
     
     db = database()
@@ -258,7 +298,7 @@ def orderBySaved(userid, saved):
           result = cursor.fetchall()
           
     except Exception as e:
-        print("orderBySaved: {}".format(e))      
+        print(e)    
           
     finally:
         db.close()
@@ -266,7 +306,10 @@ def orderBySaved(userid, saved):
     return result    
     
     
-# Ordering Feed videos by username
+
+"""
+Ordering Feed videos by username
+"""
 def orderByUser(users_id, my_id):
     
     db = database()
@@ -278,7 +321,7 @@ def orderByUser(users_id, my_id):
           result = cursor.fetchall()
           
     except Exception as e:
-        print("orderByUser: {}".format(e))
+        print(e)
           
     finally:
         db.close()
@@ -286,7 +329,9 @@ def orderByUser(users_id, my_id):
     return result
         
 
-# Get the list of video categories
+"""
+Get the list of video categories
+"""
 def getCategories():
     
     db = database()
@@ -298,7 +343,7 @@ def getCategories():
             result = cursor.fetchall()
             
     except Exception as e:
-        print("getCategories: {}".format(e))        
+        print(e)        
     
     finally:
         db.close()
@@ -306,7 +351,9 @@ def getCategories():
     return result
     
     
-# Get categories information
+"""
+Get categories information by category name
+"""
 def getCategoryByName(category_name):
     
     db = database()
@@ -318,7 +365,7 @@ def getCategoryByName(category_name):
             result = cursor.fetchone()
             
     except Exception as e:
-        print("getCategoryByName: {}".format(e))
+        print(e)
     
     finally:
         db.close()
@@ -326,7 +373,9 @@ def getCategoryByName(category_name):
     return result
     
     
-# Get all the voting information of the videos
+"""
+Get all the voting information of the videos
+"""
 def getAllVotes():
     
     db = database()
@@ -338,7 +387,7 @@ def getAllVotes():
             result = cursor.fetchall()
             
     except Exception as e:
-        print("getAllVotes: {}".format(e))        
+        print(e)       
             
     finally:
         db.close()
@@ -346,7 +395,9 @@ def getAllVotes():
     return result    
     
     
-# Check if a user has voted on a specific playlist
+"""
+Check if a user has voted on a specific playlist
+"""
 def checkVote(user_id, playlist_id):
     
     db = database()
@@ -359,7 +410,7 @@ def checkVote(user_id, playlist_id):
             result = ans['count']
 
     except Exception as e:
-        print("checkVote: {}".format(e))        
+        print(e)       
             
     finally:
         db.close()
@@ -367,7 +418,9 @@ def checkVote(user_id, playlist_id):
     return result
     
 
-# Calculate to the total amount of votes of a video    
+"""
+Calculate to the total amount of votes of a specific video
+"""
 def calcVotes(playlist_id):
     
     db = database()
@@ -380,13 +433,15 @@ def calcVotes(playlist_id):
             return result['count']
             
     except Exception as e:
-        print("calcVotes: {}".format(e))        
+        print(e)       
             
     finally:
         db.close()
     
     
-# Register a vote for a video
+"""
+Register a users vote for a specific video
+"""
 def vote(playlist_id, user_id, result):
     
     db = database()
@@ -398,7 +453,7 @@ def vote(playlist_id, user_id, result):
             db.commit()
             
     except Exception as e:
-        print("Vote: {}".format(e))
+        print(e)
     
     finally:
         db.close()

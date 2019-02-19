@@ -8,7 +8,9 @@ from jinja2.ext import Extension, loopcontrols
 app = Flask(__name__)
 
 
-# Adding Jinja Environment so I can use Jinja Extensions
+"""
+Adding Jinja Environment so I can use Jinja Extensions
+"""
 app.jinja_env = Environment(
     loader=PackageLoader('app', 'templates'),
     autoescape=select_autoescape(['html', 'xml'])
@@ -17,18 +19,37 @@ app.jinja_env = Environment(
 # Adding Jinja Loop Controls Extension
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
-# Login Page
+
+"""
+Login Page
+"""
 @app.route('/')
 def index():
     return render_template('login.html')
     
+   
+"""
+User Logout
+"""
+@app.route('/logout')
+def logout():
+    #Clean the Login Variable
+    db.setLogin('')
     
-# Registration Page    
+    return redirect('/')   
+    
+    
+"""
+Registration Page
+"""
 @app.route('/register')
 def register():
     return render_template('register.html')
+    
 
-# Register the user
+"""
+Register the user
+"""
 @app.route('/register-user/', methods=['GET','POST'])
 def regcheck():
     
@@ -49,7 +70,9 @@ def regcheck():
             return render_template('login.html')
             
             
-# Checking User Credentials    
+"""
+Checking User Credentials
+"""
 @app.route('/check-user/', methods=['GET','POST'])
 def check():
     
@@ -76,8 +99,11 @@ def check():
 
     
     return render_template('login.html')
+    
         
-# User Profile        
+"""
+User Profile
+"""
 @app.route('/<username>')
 def dashboard(username):
     
@@ -104,20 +130,24 @@ def dashboard(username):
     get_votes=db.calcVotes)
     
     
-# Menu Redirect for my profile    
+"""
+Menu Redirect for my profile
+"""
 @app.route('/profile')
 def profile():
     
     try:
         # Get Username
         user_name = db.getLogin()
-    except Exception as e:
+    except:
         return redirect('/')
     
     return redirect('/{}'.format(user_name))
     
     
-# Feed of videos created by other users original videos    
+"""
+Feed of videos created by other users original videos
+"""
 @app.route('/feed')
 def feed():
     
@@ -147,7 +177,9 @@ def feed():
     check_voted=db.checkVote)
     
     
-# New Video Page   
+"""
+Create a new video
+"""
 @app.route('/new-playlist')
 def newplaylist():
     
@@ -169,7 +201,9 @@ def newplaylist():
     categories=categories)
     
     
-# Add Video to the database    
+"""
+Add Video to the database
+"""
 @app.route('/add-playlist', methods=['GET','POST'])
 def addplaylist():
     
@@ -192,29 +226,16 @@ def addplaylist():
         video = form['video']
         category = form['category_id']
         
-        
         try:
             # Add the Video to the database
             db.addPlaylist(userid, title, description, image, video, category, origin)
         finally:
             return redirect('/{}'.format(user_name))
             
-    
-# Delete video    
-@app.route('/delete/<playlistid>', methods=['GET','POST'])
-def delete(playlistid):
-    
-    try:
-        # Get username
-        user_name = db.getLogin()
-        
-        # Delete the video
-        db.delete(playlistid)
-    finally:
-        return redirect('/{}'.format(user_name))
-        
-        
-# Edit video    
+            
+"""
+Edit video
+"""
 @app.route('/edit/<playlistid>')
 def edit(playlistid):
     
@@ -229,9 +250,28 @@ def edit(playlistid):
         
     return render_template('edit-playlist.html', 
     playlist=playlist,
-    categories=categories)
+    categories=categories)            
+            
     
-# Down vote  
+"""
+Delete a video
+"""
+@app.route('/delete/<playlistid>', methods=['GET','POST'])
+def delete(playlistid):
+    
+    try:
+        # Get username
+        user_name = db.getLogin()
+        
+        # Delete the video
+        db.delete(playlistid)
+    finally:
+        return redirect('/{}'.format(user_name))
+        
+        
+"""
+Down vote
+"""
 @app.route('/downvote/<playlistid>')
 def downvote(playlistid):
     
@@ -268,7 +308,9 @@ def downvote(playlistid):
          db.delete(playlistid)
          return redirect('/feed')
  
-# Up vote    
+"""
+Up vote
+"""
 @app.route('/upvote/<playlistid>')
 def upvote(playlistid):
     
@@ -290,7 +332,9 @@ def upvote(playlistid):
         return redirect('/feed')
     
     
-# Repost a video    
+"""
+Repost a video
+"""
 @app.route('/repost/<playlistid>')
 def repost(playlistid):
     
@@ -321,7 +365,9 @@ def repost(playlistid):
         return redirect('/{}'.format(user_name))
         
 
-# Order feed videos by category    
+"""
+Order feed videos by category
+"""
 @app.route('/order-by/category/<category_name>')     
 def ordercategory(category_name):
     
@@ -344,8 +390,7 @@ def ordercategory(category_name):
         # Getting feed video list ordered by category name
         ordered = db.orderByCategory(category_id, userid, profile)
     
-    except Exception as e:
-        print(e)
+    except:
         return redirect('/')
         
     finally:
@@ -358,7 +403,9 @@ def ordercategory(category_name):
         check_voted=db.checkVote)
         
       
-# Order profile videos by category       
+"""
+Order profile videos by category
+"""
 @app.route('/order-by/my-profile/category/<category_name>')     
 def orderprofilecategory(category_name):
     
@@ -381,8 +428,7 @@ def orderprofilecategory(category_name):
         # Getting profile video list ordered by category name
         ordered = db.orderByCategory(category_id, userid, profile)
 
-    except Exception as e:
-        print("Exception: {}".format(e))
+    except:
         return redirect('/')
         
     finally:
@@ -393,7 +439,9 @@ def orderprofilecategory(category_name):
          get_votes=db.calcVotes)
          
 
-# Order profile videos by original videos and reposted videos           
+"""
+Order profile videos by original videos and reposted videos
+"""
 @app.route('/order-by/my-profile/saved/<status>')     
 def ordersaved(status):
     
@@ -410,8 +458,7 @@ def ordersaved(status):
         # Getting profile video list ordered by original and reposted
         ordered = db.orderBySaved(userid, status)
 
-    except Exception as e:
-        print(e)
+    except:
         return redirect('/')
         
     finally:
@@ -422,7 +469,9 @@ def ordersaved(status):
          get_votes=db.calcVotes)         
         
 
-# Ordering feed videos by username       
+"""
+Ordering feed videos by username
+"""
 @app.route('/order-by/user/<user_name>')     
 def orderuser(user_name):
     
@@ -442,8 +491,7 @@ def orderuser(user_name):
         # Getting feed videos ordered by user name
         ordered = db.orderByUser(users_id, my_id)
 
-    except Exception as e:
-        print(e)
+    except:
         return redirect('/')
         
     finally:
@@ -454,35 +502,6 @@ def orderuser(user_name):
         userid=my_id,
         get_votes=db.calcVotes,
         check_voted=db.checkVote)
-
-# Edit videos
-@app.route('/edit-playlist', methods=['GET','POST'])
-def editplaylist():
-    
-    if request.method == 'POST':
-        form = request.form
-        playlistid = int(form['playlist_id'])
-        title = form['title']
-        description = form['description']
-        img_source = form['image']
-        video_source = form['video']
-        category_id = int(form['category_id'])
-        
-    try:
-        # Getting username
-        user_name = db.getLogin()
-        
-        # Edit video information in the database
-        db.edit(playlistid, title, description, img_source, video_source, category_id)
-    finally:
-        return redirect('/{}'.format(user_name))
-
-@app.route('/logout')
-def logout():
-    #Clean the Login Variable
-    db.setLogin('')
-    
-    return redirect('/')
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
