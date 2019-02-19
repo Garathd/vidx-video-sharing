@@ -103,7 +103,7 @@ def getMyPlaylist(userid):
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, p.origin, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = '{}'".format(userid)
+          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, p.origin, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = '{}' ORDER BY p.playlist_id DESC".format(userid)
           cursor.execute(sql)
           result = cursor.fetchall()
           
@@ -123,7 +123,7 @@ def getOtherVideos(userid):
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != '{}' AND origin = 'true'".format(userid)
+          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != '{}' AND origin = 'true' ORDER BY p.playlist_id DESC".format(userid)
           cursor.execute(sql)
           result = cursor.fetchall()
           
