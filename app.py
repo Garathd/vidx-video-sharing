@@ -234,7 +234,7 @@ def addplaylist():
             
             
 """
-Edit video
+Edit video by playlist id
 """
 @app.route('/edit/<playlistid>')
 def edit(playlistid):
@@ -251,6 +251,31 @@ def edit(playlistid):
     return render_template('edit-playlist.html', 
     playlist=playlist,
     categories=categories)            
+            
+            
+"""
+Edit videos
+"""
+@app.route('/edit-playlist', methods=['GET','POST'])
+def editplaylist():
+    
+    if request.method == 'POST':
+        form = request.form
+        playlistid = int(form['playlist_id'])
+        title = form['title']
+        description = form['description']
+        img_source = form['image']
+        video_source = form['video']
+        category_id = int(form['category_id'])
+        
+    try:
+        # Getting username
+        user_name = db.getLogin()
+        
+        # Edit video information in the database
+        db.edit(playlistid, title, description, img_source, video_source, category_id)
+    finally:
+        return redirect('/{}'.format(user_name))            
             
     
 """
