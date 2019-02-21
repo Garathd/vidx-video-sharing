@@ -49,28 +49,33 @@ def local():
     
   
 # This is for setting either a local or remote database   
-database = remote    
-
+database = local
     
 """
 Register user to database
 """
 def register(username, password):
-    
-    db = database()
-    
-    sql = "INSERT INTO users(username, password) VALUES ('{0}', '{1}')".format(username, password)
 
-    try:
-        with db.cursor(pymysql.cursors.DictCursor) as cursor:
-            cursor.execute(sql)
-            db.commit()
+    # Check if user exists already
+    value = authenticate(username, password)
+    if value == None:
+        db = database()
+    
+        sql = "INSERT INTO users(username, password) VALUES ('{0}', '{1}')".format(username, password)
+    
+        try:
+            with db.cursor(pymysql.cursors.DictCursor) as cursor:
+                cursor.execute(sql)
+                db.commit()
+                
+        except Exception as e:
+            print(e)
             
-    except Exception as e:
-        print(e)
-        
-    finally:
-        db.close()
+        finally:
+            db.close()
+      
+    else:
+        return "Username Taken"
         
         
 """
