@@ -45,12 +45,17 @@ nav {
 .home-post-footer {
   margin-top: 1.5%; }
 
-/*Test*/
-.card .card-image img {
-  height: 300px !important; }
-
 .up-vote {
   color: green !important; }
 
 .down-vote {
   color: red !important; }
+
+@media only screen and (min-width: 992px) {
+  .card .card-image img {
+    height: 260px !important;
+    object-fit: cover !important; } }
+
+@media only screen and (max-width: 992px) {
+  .card .card-image img {
+    height: auto !important; } }

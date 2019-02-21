@@ -1,6 +1,5 @@
 import os
 import pymysql
-import auth
 
 # Local Database Credentials
 user = os.getenv('C9_USER')
@@ -308,7 +307,7 @@ def orderBySaved(userid, saved):
     
 
 """
-Ordering Feed videos by username
+Ordering videos by username
 """
 def orderByUser(users_id, my_id):
     
@@ -352,9 +351,9 @@ def getCategories():
     
     
 """
-Get categories information by category name
+Get categories id by category name
 """
-def getCategoryByName(category_name):
+def getCategoryIdByName(category_name):
     
     db = database()
     

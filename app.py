@@ -89,7 +89,7 @@ def check():
                 user = str(result[0])
                 if username == user:
                     db.setLogin(username)
-                    return redirect('/feed')
+                    return redirect('/videos')
           
             else:
                 return render_template('login.html')
@@ -148,8 +148,8 @@ def profile():
 """
 Feed of videos created by other users original videos
 """
-@app.route('/feed')
-def feed():
+@app.route('/videos')
+def videos():
     
     try:
         # Getting username
@@ -229,8 +229,10 @@ def addplaylist():
         try:
             # Add the Video to the database
             db.addPlaylist(userid, title, description, image, video, category, origin)
-        finally:
-            return redirect('/{}'.format(user_name))
+        except:
+            return redirect('/{}')
+            
+        return redirect('/{}'.format(user_name))
             
             
 """
@@ -326,12 +328,12 @@ def downvote(playlistid):
         except: 
             redirect('/')   
         finally:
-            return redirect('/feed')
+            return redirect('/videos')
         
        
     else:
          db.delete(playlistid)
-         return redirect('/feed')
+         return redirect('/videos')
  
 """
 Up vote
@@ -354,7 +356,7 @@ def upvote(playlistid):
     except: 
         redirect('/')   
     finally:
-        return redirect('/feed')
+        return redirect('/videos')
     
     
 """
@@ -386,52 +388,16 @@ def repost(playlistid):
         # Adding video to database
         db.addPlaylist(userid, title, description, img_source, video_source, category_id, origin)
         
-    finally:
-        return redirect('/{}'.format(user_name))
-        
-
-"""
-Order feed videos by category
-"""
-@app.route('/order-by/category/<category_name>')     
-def ordercategory(category_name):
-    
-    # Not my videos or profile page
-    profile = False
-    
-    try:
-        # Getting user name
-        user_name = db.getLogin()
-        
-        # Getting user id
-        userid = db.getUserId(user_name)
-        
-        # Getting categories by name and ordering
-        category_id = db.getCategoryByName(category_name)
-        
-        # Getting vote information
-        votes = db.getAllVotes()
-        
-        # Getting feed video list ordered by category name
-        ordered = db.orderByCategory(category_id, userid, profile)
-    
     except:
         return redirect('/')
         
-    finally:
-        return render_template('videos.html',
-        videos=ordered, 
-        username=user_name,
-        votes=votes,
-        userid=userid,
-        get_votes=db.calcVotes,
-        check_voted=db.checkVote)
+    return redirect('/{}'.format(user_name))
         
-      
+
 """
 Order profile videos by category
 """
-@app.route('/order-by/my-profile/category/<category_name>')     
+@app.route('/my-profile/order-by/category/<category_name>')     
 def orderprofilecategory(category_name):
     
     # My videos and profile
@@ -445,7 +411,7 @@ def orderprofilecategory(category_name):
         userid = db.getUserId(user_name)
         
         # Getting category by category name and ordering
-        category_id = db.getCategoryByName(category_name)
+        category_id = db.getCategoryIdByName(category_name)
         
         # Getting vote information
         votes = db.getAllVotes()
@@ -467,7 +433,7 @@ def orderprofilecategory(category_name):
 """
 Order profile videos by original videos and reposted videos
 """
-@app.route('/order-by/my-profile/saved/<status>')     
+@app.route('/my-profile/order-by/saved/<status>')     
 def ordersaved(status):
     
     try:
@@ -492,12 +458,49 @@ def ordersaved(status):
          username=user_name,
          votes=votes,
          get_votes=db.calcVotes)         
+         
+        
+"""
+Order videos by category
+"""
+@app.route('/videos/order-by/category/<category_name>')     
+def ordercategory(category_name):
+    
+    # Not my videos or profile page
+    profile = False
+    
+    try:
+        # Getting user name
+        user_name = db.getLogin()
+        
+        # Getting user id
+        userid = db.getUserId(user_name)
+        
+        # Getting categories by name and ordering
+        category_id = db.getCategoryIdByName(category_name)
+        
+        # Getting vote information
+        votes = db.getAllVotes()
+        
+        # Getting video list ordered by category name
+        ordered = db.orderByCategory(category_id, userid, profile)
+    
+    except:
+        return redirect('/')
+        
+    return render_template('videos.html',
+        videos=ordered, 
+        username=user_name,
+        votes=votes,
+        userid=userid,
+        get_votes=db.calcVotes,
+        check_voted=db.checkVote)     
         
 
 """
-Ordering feed videos by username
+Ordering videos by username
 """
-@app.route('/order-by/user/<user_name>')     
+@app.route('/videos/order-by/user/<user_name>')     
 def orderuser(user_name):
     
     try:
@@ -513,7 +516,7 @@ def orderuser(user_name):
         #Getting vote information
         votes = db.getAllVotes()
         
-        # Getting feed videos ordered by user name
+        # Getting videos ordered by user name
         ordered = db.orderByUser(users_id, my_id)
 
     except:
@@ -527,6 +530,7 @@ def orderuser(user_name):
         userid=my_id,
         get_votes=db.calcVotes,
         check_voted=db.checkVote)
+        
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
