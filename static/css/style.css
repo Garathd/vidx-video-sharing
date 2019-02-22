@@ -52,7 +52,8 @@ nav {
 
 .play_button {
   background-color: #3f51b5 !important;
-  color: #FFFFFF !important; }
+  color: #FFFFFF !important;
+  margin-top: 5% !important; }
 
 .play_button i {
   font-size: 1.75rem;
@@ -93,4 +94,6 @@ nav .brand-logo {
 
 @media only screen and (max-width: 992px) {
   .card .card-image img {
-    height: auto !important; } }
+    height: auto !important; }
+  .play_button {
+    padding-top: 6.5% !important; } }
