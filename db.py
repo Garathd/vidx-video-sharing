@@ -309,7 +309,6 @@ def orderBySaved(userid, saved):
         
     return result    
     
-    
 
 """
 Ordering videos by username

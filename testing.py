@@ -13,33 +13,29 @@ def setPlaylistId(set_id):
 def getPlaylistId():
     return playlist_id
     
-def deleteVideo():
-    playlistid = getPlaylistId()
-    db.delete(playlistid)
-    
 class tests(unittest.TestCase):
     
+    # Testing user info
     username = "Garath"
     password = "access"
     user_id = 1
     
+    # Testing video info
     title = "Test123xyz"
     description = "Test123xyz"
     image = ""
     video = "http://youtube.com"
     category_id = 1
     origin = "true"
-    
     category_name = "Music"
+    
 
     """
     Testing setting and getting Login Name
     """
     
     def testA(self):
-        
         db.setLogin(tests.username)
-        
         self.assertEqual(tests.username, db.getLogin())
         
     
@@ -47,7 +43,6 @@ class tests(unittest.TestCase):
     Testing register user
     """
     def testB(self):
-
         result = db.register(tests.username, tests.password)
         self.assertEqual(result, "Username Taken")
         
@@ -56,7 +51,6 @@ class tests(unittest.TestCase):
     Testing login user
     """
     def testC(self):
-
         result = db.authenticate(tests.username, tests.password)
         self.assertEqual(result[0], tests.username)
         
@@ -65,7 +59,6 @@ class tests(unittest.TestCase):
     Testing get user id by username
     """
     def testD(self):
-        
         result = int(db.getUserId(tests.username))
         self.assertGreater(result, 0)
          
@@ -74,9 +67,7 @@ class tests(unittest.TestCase):
     Testing getting a users list of videos
     """    
     def testE(self):
-        
         result = db.getMyPlaylist(tests.user_id)
-    
         self.assertTrue(result)
         
         
@@ -84,9 +75,7 @@ class tests(unittest.TestCase):
     Testing getting all the videos
     """    
     def testF(self):
-        
         result = db.getOtherVideos(tests.user_id)
-    
         self.assertTrue(result)
         
         
@@ -94,7 +83,6 @@ class tests(unittest.TestCase):
     Testing Add a new video 
     """
     def testG(self):
-        
         db.addPlaylist(tests.user_id, 
         tests.title, 
         tests.description, 
@@ -127,11 +115,7 @@ class tests(unittest.TestCase):
     Test get Playlist By ID  
     """
     def testH(self):
-        
-        playlistid = getPlaylistId()
-        
-        value = db.getPlaylistById(playlistid)
-    
+        value = db.getPlaylistById(getPlaylistId())
         self.assertTrue(value)        
             
             
@@ -140,12 +124,12 @@ class tests(unittest.TestCase):
     """
     def testI(self):
         
+        # Temporary data
         new_title = "Test"
         new_description = "Test"
-        playlistid = getPlaylistId()
         
         db.edit(
-        playlistid, 
+        getPlaylistId(), 
         new_title, 
         new_description, 
         tests.image, 
@@ -153,6 +137,7 @@ class tests(unittest.TestCase):
         tests.category_id)
         
         self.assertNotEqual(new_title, tests.title)
+        
         
     """
     Testing order videos by category
@@ -190,6 +175,7 @@ class tests(unittest.TestCase):
         result = db.getCategories()
         self.assertTrue(result)
         
+        
     """
     Testing get categories id by category name
     """
@@ -197,34 +183,46 @@ class tests(unittest.TestCase):
         result = db.getCategoryIdByName(tests.category_name)
         self.assertTrue(result)
         
+        
     """
     Testing Register a users vote and check if they voted
     """
     def testO(self):
-        
-        playlistid = getPlaylistId()
-        db.vote(playlistid, tests.user_id, 1)
-        calc = db.calcVotes(playlistid)
+        db.vote(getPlaylistId(), tests.user_id, 1)
+        calc = db.calcVotes(getPlaylistId())
         self.assertGreater(calc, 0)
+        
+        
+    """
+    Testing if user has voted on a specific playlist
+    """
+    def testP(self):
+        result = db.checkVote(tests.user_id, getPlaylistId())
+        self.assertEqual(result, 1)
+        
+        
+    """
+    Testing calculate the total amount of votes of a specific video
+    """
+    def testQ(self):
+        result = db.calcVotes(getPlaylistId())
+        self.assertGreater(result, 0)
         
     
     """
     Testing get all vote information
     """
-    def testP(self):
+    def testR(self):
         result = db.getAllVotes()
-        
-        
         self.assertTrue(result)
 
 
     """
     Testing delete by playlist id
     """
-    def testQ(self):
+    def testS(self):
         playlistid = getPlaylistId()
         db.delete(playlistid)
-        
         
         
         
