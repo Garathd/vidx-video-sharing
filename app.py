@@ -2,11 +2,10 @@ import os
 import pymysql
 import db
 from jinja2 import Environment, PackageLoader, select_autoescape
-from flask import Flask, render_template, request, redirect
 from jinja2.ext import Extension, loopcontrols
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
-
 
 """
 Adding Jinja Environment so I can use Jinja Extensions
@@ -33,10 +32,19 @@ User Logout
 """
 @app.route('/logout')
 def logout():
-    #Clean the Login Variable
-    db.setLogin('')
     
-    return redirect('/')   
+    if db.getLogin():
+        message = {
+        "message_type" : "success",
+        "message_info" : "{0} has logged out!".format(db.getLogin())
+        }
+        
+        #Clean the Login Variable
+        db.setLogin('')
+        return render_template('login.html', message=message)
+        
+    else:
+       return redirect('/')
     
     
 """
@@ -61,14 +69,29 @@ def regcheck():
         
         # Registering User
         try:
-           db.register(username,password)
+            result = db.register(username,password)
+            if result:
+                # Account creation successful
+                message = {
+                    "message_type" : "success",
+                    "message_info" : "{0}'s account has been created!".format(username)
+                }
+                return render_template('login.html', message=message)
+            else:
+                # Username has been taken
+                message = {
+                    "message_type" : "error",
+                    "message_info" : "The username {0} has been taken!".format(username)
+                }
+
+                return render_template('register.html', message=message)
 
         except Exception as e:
             print(e)
+            return redirect('/register')
+    
+    return redirect('/register')
 
-        finally:
-            return render_template('login.html')
-            
             
 """
 Checking User Credentials
@@ -92,13 +115,17 @@ def check():
                     return redirect('/videos')
           
             else:
-                return render_template('login.html')
+                message = {
+                    "message_type" : "error",
+                    "message_info" : "Invalid Login Details!"
+                }
+                return render_template('login.html', message=message)
             
         except Exception as e:
             print(e)
-
+            return redirect('/')
     
-    return render_template('login.html')
+    return redirect('/')
     
         
 """

@@ -49,7 +49,7 @@ def local():
     
   
 # This is for setting either a local or remote database   
-database = local
+database = remote
     
 """
 Register user to database
@@ -73,9 +73,10 @@ def register(username, password):
             
         finally:
             db.close()
+            return True
       
     else:
-        return "Username Taken"
+        return False
         
         
 """
@@ -90,6 +91,11 @@ def authenticate(username, password):
           sql = "SELECT username FROM users WHERE username ='{0}' AND password ='{1}'".format(username, password)
           cursor.execute(sql)
           result = cursor.fetchone()
+
+          if result == None:
+              return False
+          else:
+              return result
           
     except Exception as e:
         print(e)

@@ -2,28 +2,28 @@
 <html>
 
 <head>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
 
     <style>
-        nav ul a:hover {
+        nav ul a:hover,  nav a:hover {
             background-color: #FFF !important;
             text-decoration: none !important;
         }
     </style>
-    
+
 </head>
 
 <body>
     <header>
         <nav>
             <div class="nav-wrapper">
-                <!--<a href="#" class="brand-logo">Videos</a>-->
+                <a href="/videos" class="brand-logo">VIDX</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/profile">My Videos<i class="material-icons right">video_library</i></a></li>
@@ -37,10 +37,10 @@
                 <ul class="side-nav" id="mobile-demo">
                     <li><a href="/profile">My Videos<i class="material-icons right">video_library</i></a></li>
                     <li><a href="/videos">All Videos<i class="material-icons right">ondemand_video</i></a>
-                    <li><a href="/new-playlist">New Video<i class="material-icons right">video_call</i></a>
-                    </li>
-                    <li><a href="/logout">Logout<i class="material-icons right">person</i></a>
-                    </li>
+                        <li><a href="/new-playlist">New Video<i class="material-icons right">video_call</i></a>
+                        </li>
+                        <li><a href="/logout">Logout<i class="material-icons right">person</i></a>
+                        </li>
                 </ul>
             </div>
         </nav>
@@ -52,9 +52,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    
+
     <script type="text/javascript">
         $(document).ready(function() {
+            /*global $*/
             $('.collapsible').collapsible();
             $('select').material_select();
             $(".button-collapse").sideNav();

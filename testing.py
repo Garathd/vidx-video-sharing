@@ -44,7 +44,7 @@ class tests(unittest.TestCase):
     """
     def testB(self):
         result = db.register(tests.username, tests.password)
-        self.assertEqual(result, "Username Taken")
+        self.assertFalse(result)
         
     
     """
