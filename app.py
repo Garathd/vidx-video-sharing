@@ -70,6 +70,7 @@ def regcheck():
         # Registering User
         try:
             result = db.register(username,password)
+            
             if result:
                 # Account creation successful
                 message = {
@@ -86,13 +87,10 @@ def regcheck():
 
                 return render_template('register.html', message=message)
 
-        except Exception as e:
-            print(e)
+        except:
             return redirect('/register')
-    
-    return redirect('/register')
 
-            
+
 """
 Checking User Credentials
 """
@@ -121,11 +119,8 @@ def check():
                 }
                 return render_template('login.html', message=message)
             
-        except Exception as e:
-            print(e)
+        except:
             return redirect('/')
-    
-    return redirect('/')
     
         
 """
@@ -147,14 +142,14 @@ def dashboard(username):
         # Getting the vote information
         votes = db.getAllVotes()
         
-    except Exception as e: 
+        return render_template('dashboard.html',
+        username=username,
+        playlists=playlists,
+        votes=votes,
+        get_votes=db.calcVotes)
+        
+    except:
         return redirect('/')
-    
-    return render_template('dashboard.html',
-    username=username,
-    playlists=playlists,
-    votes=votes,
-    get_votes=db.calcVotes)
     
     
 """
@@ -166,10 +161,9 @@ def profile():
     try:
         # Get Username
         user_name = db.getLogin()
+        return redirect('/{}'.format(user_name))
     except:
         return redirect('/')
-    
-    return redirect('/{}'.format(user_name))
     
     
 """
@@ -190,18 +184,17 @@ def videos():
         
         # Getting the vote information
         votes = db.getAllVotes()
+        
+        return render_template('videos.html',
+        videos=videos,
+        username=user_name,
+        votes=votes,
+        userid=userid,
+        get_votes=db.calcVotes,
+        check_voted=db.checkVote)
 
-    except Exception as e:
-        print(e)
+    except:
         return redirect('/')
-    
-    return render_template('videos.html',
-    videos=videos,
-    username=user_name,
-    votes=votes,
-    userid=userid,
-    get_votes=db.calcVotes,
-    check_voted=db.checkVote)
     
     
 """
@@ -219,13 +212,13 @@ def newplaylist():
         
         # Getting list of categories
         categories = db.getCategories()
+        
+        return render_template('new-playlist.html', 
+        user_name=user_name, 
+        userid=userid, 
+        categories=categories)
     except: 
         return redirect('/')
-    
-    return render_template('new-playlist.html', 
-    user_name=user_name, 
-    userid=userid, 
-    categories=categories)
     
     
 """
@@ -237,13 +230,6 @@ def addplaylist():
     # Video's original creator
     origin = "true"
     
-    try:
-        # Get username
-        user_name = db.getLogin()
-    except: 
-        return redirect('/')
-       
-       
     if request.method == 'POST':
         form = request.form
         userid = form['user_id']
@@ -253,13 +239,17 @@ def addplaylist():
         video = form['video']
         category = form['category_id']
         
-        try:
-            # Add the Video to the database
-            db.addPlaylist(userid, title, description, image, video, category, origin)
-        except:
-            return redirect('/{}')
-            
+    try:
+        # Get username
+        user_name = db.getLogin()
+        
+        # Add the Video to the database
+        db.addPlaylist(userid, title, description, image, video, category, origin)
+        
         return redirect('/{}'.format(user_name))
+        
+    except: 
+        return redirect('/')
             
             
 """
@@ -268,20 +258,24 @@ Edit video by playlist id
 @app.route('/edit/<playlistid>')
 def edit(playlistid):
     
-    # Getting username
-    user_name = db.getLogin()
-    
-    # Getting categories list
-    categories = db.getCategories()
-    
-    # Getting playlists by id
-    playlist = db.getPlaylistById(playlistid)
+    try:
+        # Getting username
+        user_name = db.getLogin()
         
-    return render_template('edit-playlist.html', 
-    playlist=playlist,
-    categories=categories)            
+        # Getting categories list
+        categories = db.getCategories()
+        
+        # Getting playlists by id
+        playlist = db.getPlaylistById(playlistid)
             
+        return render_template('edit-playlist.html', 
+        playlist=playlist,
+        categories=categories)            
             
+    except:
+        return redirect('/')
+    
+
 """
 Edit videos
 """
@@ -303,8 +297,10 @@ def editplaylist():
         
         # Edit video information in the database
         db.edit(playlistid, title, description, img_source, video_source, category_id)
-    finally:
-        return redirect('/{}'.format(user_name))            
+        return redirect('/{}'.format(user_name)) 
+    
+    except:
+        return redirect('/')       
             
     
 """
@@ -319,8 +315,10 @@ def delete(playlistid):
         
         # Delete the video
         db.delete(playlistid)
-    finally:
+        
         return redirect('/{}'.format(user_name))
+    except:
+        return redirect('/')
         
         
 """
@@ -337,9 +335,6 @@ def downvote(playlistid):
     
     if total_votes == None:
         total_votes = 0
-    
-    print("total_votes: {}".format(total_votes))
-    
 
     # This deletes a video if it has a total score of -5
     if total_votes > -4:
@@ -352,12 +347,11 @@ def downvote(playlistid):
             
             # Make vote
             db.vote(playlistid, userid, vote)
+            return redirect('/videos')
+            
         except: 
             redirect('/')   
-        finally:
-            return redirect('/videos')
-        
-       
+            
     else:
          db.delete(playlistid)
          return redirect('/videos')
@@ -380,10 +374,11 @@ def upvote(playlistid):
         
         # Make vote
         db.vote(playlistid, userid, vote)
+        
+        return redirect('/videos')
+        
     except: 
         redirect('/')   
-    finally:
-        return redirect('/videos')
     
     
 """
@@ -415,10 +410,10 @@ def repost(playlistid):
         # Adding video to database
         db.addPlaylist(userid, title, description, img_source, video_source, category_id, origin)
         
+        return redirect('/{}'.format(user_name))
+        
     except:
         return redirect('/')
-        
-    return redirect('/{}'.format(user_name))
         
 
 """
@@ -445,18 +440,17 @@ def orderprofilecategory(category_name):
         
         # Getting profile video list ordered by category name
         ordered = db.orderByCategory(category_id, userid, profile)
+        
+        return render_template('dashboard.html', 
+        playlists=ordered, 
+        username=user_name,
+        votes=votes,
+        get_votes=db.calcVotes)
 
     except:
         return redirect('/')
-        
-    finally:
-         return render_template('dashboard.html', 
-         playlists=ordered, 
-         username=user_name,
-         votes=votes,
-         get_votes=db.calcVotes)
-         
 
+         
 """
 Order profile videos by original videos and reposted videos
 """
@@ -475,17 +469,16 @@ def ordersaved(status):
         
         # Getting profile video list ordered by original and reposted
         ordered = db.orderBySaved(userid, status)
+        
+        return render_template('dashboard.html', 
+        playlists=ordered, 
+        username=user_name,
+        votes=votes,
+        get_votes=db.calcVotes)  
 
     except:
         return redirect('/')
         
-    finally:
-         return render_template('dashboard.html', 
-         playlists=ordered, 
-         username=user_name,
-         votes=votes,
-         get_votes=db.calcVotes)         
-         
         
 """
 Order videos by category
@@ -511,19 +504,19 @@ def ordercategory(category_name):
         
         # Getting video list ordered by category name
         ordered = db.orderByCategory(category_id, userid, profile)
-    
-    except:
-        return redirect('/')
         
-    return render_template('videos.html',
+        return render_template('videos.html',
         videos=ordered, 
         username=user_name,
         votes=votes,
         userid=userid,
         get_votes=db.calcVotes,
-        check_voted=db.checkVote)     
+        check_voted=db.checkVote) 
+    
+    except:
+        return redirect('/')
         
-
+        
 """
 Ordering videos by username
 """
@@ -545,11 +538,7 @@ def orderuser(user_name):
         
         # Getting videos ordered by user name
         ordered = db.orderByUser(users_id, my_id)
-
-    except:
-        return redirect('/')
         
-    finally:
         return render_template('videos.html',
         videos=ordered, 
         username=my_username,
@@ -557,8 +546,11 @@ def orderuser(user_name):
         userid=my_id,
         get_votes=db.calcVotes,
         check_voted=db.checkVote)
-        
 
+    except:
+        return redirect('/')
+        
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),

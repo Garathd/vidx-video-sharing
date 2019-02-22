@@ -10,10 +10,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
 
+    <!-- Needed here for override -->
     <style>
-        nav ul a:hover,  nav a:hover {
+        nav ul a:hover,
+        nav a:hover {
             background-color: #FFF !important;
             text-decoration: none !important;
+        }
+        nav .menu-button a:hover {
+            background-color: transparent !important;
+            color: #FFF !important;
         }
     </style>
 
@@ -23,8 +29,10 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <a href="/videos" class="brand-logo">VIDX</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <a href="/videos" class="brand-logo">VIDX<i class="material-icons dash-logo right">live_tv</i></a>
+                <div class="menu-button">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/profile">My Videos<i class="material-icons right">video_library</i></a></li>
                     <li><a href="/videos">All Videos<i class="material-icons right">ondemand_video</i></a>

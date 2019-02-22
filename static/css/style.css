@@ -68,6 +68,18 @@ nav .brand-logo {
   margin: 0px 0px 0px 10px !important;
   font-weight: 600 !important; }
 
+.logo {
+  font-size: 0.85em !important;
+  margin-left: 0 !important; }
+
+.dash-logo {
+  font-size: 0.85em !important;
+  margin-left: 5px !important;
+  margin-top: -0.5% !important; }
+
+.card {
+  margin-top: 10% !important; }
+
 .up-vote {
   color: green !important; }
 
