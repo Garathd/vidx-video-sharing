@@ -9,10 +9,20 @@
     .card .card-image img {
         height: auto !important;
     }
-    .play_button{
+    .play_button {
         padding-top: 7% !important;
     }
-    .save_button{
-        padding-top: 2.5% !important;
+}
+
+@media only screen and (max-width: 640px) {
+    .save-button {
+        padding-top: 1.5% !important;
+    }
+    
+}
+
+@media only screen and (max-width: 320px) {
+    .save-button {
+        padding-top: 3% !important;
     }
 }
