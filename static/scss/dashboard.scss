@@ -12,7 +12,7 @@ nav {
     margin: 2%;
 }
 
-.play_button{
+.play_button {
     background-color: $background-color !important;
     color: #FFFFFF !important;
     margin-top: 5% !important;
@@ -29,7 +29,7 @@ nav {
     color: #FFFFFF !important;
 }
 
-.save-icon{
+.save-icon {
     margin-top: -4.5% !important;
 }
 
@@ -53,6 +53,30 @@ nav .brand-logo {
     font-size: 0.75em !important;
     margin-left: 1px !important;
     margin-top: -1% !important;
+}
+
+nav ul a:hover,
+nav a:hover {
+    background-color: #FFF !important;
+    text-decoration: none !important;
+}
+
+nav .menu-button a:hover {
+    background-color: transparent !important;
+    color: #FFF !important;
+}
+
+.side-nav li>a {
+    color: #212121 !important;
+}
+
+.side-nav li>a:hover .mobile-link,
+.side-nav li>a:hover {
+    color: #FFFFFF !important;
+}
+
+.side-nav li>a:hover {
+    background-color: #3f51b5 !important;
 }
 
 .card {

@@ -85,6 +85,25 @@ nav .brand-logo {
   margin-left: 1px !important;
   margin-top: -1% !important; }
 
+nav ul a:hover,
+nav a:hover {
+  background-color: #FFF !important;
+  text-decoration: none !important; }
+
+nav .menu-button a:hover {
+  background-color: transparent !important;
+  color: #FFF !important; }
+
+.side-nav li > a {
+  color: #212121 !important; }
+
+.side-nav li > a:hover .mobile-link,
+.side-nav li > a:hover {
+  color: #FFFFFF !important; }
+
+.side-nav li > a:hover {
+  background-color: #3f51b5 !important; }
+
 .card {
   margin-top: 10% !important; }
 
