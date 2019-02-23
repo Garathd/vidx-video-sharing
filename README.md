@@ -1,8 +1,9 @@
 # milestone-project-4
 
-This project is inspired by the short comings of Social Media Platforms. It is essentially an Anti Social Network that doesn't conform to normal standards of Social Media. What makes this platform so different is that if a video gets a voting rating of -5 it is then deleted from the database unless a post has been reposted or saved to a users profile and in that case it only exists on the users profile and is not accessible to other users. If a person has 3 videos taken down then their profile and all other associated data is deleted. I think that having the platform set up in this way gives the responsibility to the users of the site to ensure videos are taken down because it's all about how they vote and also the fact that the platform doesn't let users set upload their own videos or pictures. Users can only use external links to point to pictures and videos. This also helps keep the database size small.
+This project is inspired by looking for streams and finding dead links to a TV Show or Movie that you maybe want to view. This application is not strictly limited to streaming and in no way shape or form am I promoting or encouraging this application to be used for streaming links it was just an inspiration!. I want this application to be something else, ideally originally created user content that works with momentum based videos. If it's bad then it gets deleted if it's good then it stays. 
 
-(NB) Yet to incorporate the automatic deleting of profiles and videos. (Last Major Code Change)
+
+If a video link is rated -5 then the video gets deleted from the database unless someone else has saved (reposted) the video to their profile and in this circumstance a reposted (saved) video is only viewable and accessible to the user that has saved it.
 
 ## UX
 
