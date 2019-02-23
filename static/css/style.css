@@ -60,6 +60,10 @@ nav {
   line-height: inherit;
   margin-top: -10%; }
 
+.save-button {
+  background-color: #3f51b5 !important;
+  color: #FFFFFF !important; }
+
 .home-post-footer {
   margin-top: 1.5%; }
 
@@ -96,4 +100,4 @@ nav .brand-logo {
   .card .card-image img {
     height: auto !important; }
   .play_button {
-    padding-top: 6.5% !important; } }
+    padding-top: 7% !important; } }
