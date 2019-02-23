@@ -43,6 +43,11 @@
     <div class="container">
         {% block content %} {% endblock %}
     </div>
+
+    <div class="scrollTop">
+        <i class="material-icons right">keyboard_arrow_up</i>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
@@ -64,6 +69,19 @@
             close: 'Ok',
             closeOnSelect: false // Close upon selecting a date,
         });
+
+        //Scroll to top button
+        var scrollTop = $(".scrollTop");
+
+        $(scrollTop).click(function() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+
+        });
+
+        
     </script>
 </body>
 

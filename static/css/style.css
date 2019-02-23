@@ -107,6 +107,11 @@ nav .menu-button a:hover {
 .card {
   margin-top: 10% !important; }
 
+.scrollTop i {
+  font-size: 2.75em !important;
+  cursor: pointer !important;
+  color: #3f51b5 !important; }
+
 .up-vote {
   color: green !important; }
 
