@@ -93,6 +93,16 @@ nav .menu-button a:hover {
     color: #3f51b5 !important;
 }
 
+.footer-bar {
+    height: 50px;
+    background-color: transparent;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
 .voted{
     cursor: pointer !important;
 }

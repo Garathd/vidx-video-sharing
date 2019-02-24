@@ -115,6 +115,15 @@ nav .menu-button a:hover {
   cursor: pointer !important;
   color: #3f51b5 !important; }
 
+.footer-bar {
+  height: 50px;
+  background-color: transparent;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden; }
+
 .voted {
   cursor: pointer !important; }
 
@@ -123,6 +132,18 @@ nav .menu-button a:hover {
 
 .down-vote {
   color: red !important; }
+
+.welcome {
+  margin-top: 7.5% !important; }
+
+.live-icon {
+  color: #007bff; }
+
+.welcome-list li {
+  margin-bottom: 1.5%; }
+
+.welcome-list > li > i {
+  padding-top: 1.5%; }
 
 @media only screen and (min-width: 992px) {
   .card .card-image img {

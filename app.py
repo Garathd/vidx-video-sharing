@@ -26,6 +26,14 @@ Login Page
 def index():
     return render_template('login.html')
     
+
+"""
+Welcome Page
+"""
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')
+    
    
 """
 User Logout
@@ -109,9 +117,22 @@ def check():
             if result:
                 user = str(result[0])
                 if username == user:
+                    
+                    # Setting Username
                     db.setLogin(username)
-                    return redirect('/videos')
-          
+                    
+                    # Getting User ID
+                    userid = db.getUserId(username)
+                    
+                    # Checking if user has any videos
+                    videos = db.getMyVideos(userid)
+                    
+                    if videos:
+                        return redirect('/videos')
+                        
+                    else:
+                        return redirect('/welcome')
+                        
             else:
                 message = {
                     "message_type" : "error",
@@ -121,6 +142,8 @@ def check():
             
         except:
             return redirect('/')
+            
+    return render_template('login.html')
     
         
 """

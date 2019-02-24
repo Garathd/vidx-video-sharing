@@ -15,7 +15,7 @@ $('.datepicker').pickadate({
 });
 
 //Scroll to top button
-var scrollTop = $(".scrollTop");
+var scrollTop = $("#scrollTop");
 
 $(scrollTop).click(function() {
     $('html, body').animate({
