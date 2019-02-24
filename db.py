@@ -413,10 +413,9 @@ def checkVote(user_id, playlist_id):
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-            sql = "SELECT COUNT(vote) AS count FROM votes WHERE playlist_id = {0} AND user_id = {1}".format(playlist_id,user_id)
+            sql = "SELECT COUNT(vote) AS count, vote as vote FROM votes WHERE playlist_id = {0} AND user_id = {1}".format(playlist_id,user_id)
             cursor.execute(sql)
-            ans = cursor.fetchone()
-            result = ans['count']
+            result = cursor.fetchone()
 
     except Exception as e:
         print(e)       

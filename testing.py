@@ -198,7 +198,7 @@ class tests(unittest.TestCase):
     """
     def testP(self):
         result = db.checkVote(tests.user_id, getPlaylistId())
-        self.assertEqual(result, 1)
+        self.assertEqual(result['count'], 1)
         
         
     """

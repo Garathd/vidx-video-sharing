@@ -331,7 +331,7 @@ def downvote(playlistid):
     vote = -1
     
     # Calculating the votes for video
-    total_votes = int(db.calcVotes(playlistid))
+    total_votes = db.calcVotes(playlistid)
     
     if total_votes == None:
         total_votes = 0

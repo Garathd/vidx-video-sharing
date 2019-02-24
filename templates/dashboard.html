@@ -4,34 +4,33 @@
     <div class="col-lg-4 col-md-12">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="{{ playlist.img_source }}" onerror="this.onerror=null;this.src='/static/images/blank.png';">
+                <img class="activator backup_picture" src="{{ playlist.img_source }}" onerror="this.onerror=null;this.src='/static/images/blank.png';">
             </div>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{ playlist.title }}<i class="material-icons right">more_vert</i></span>
+                <span class="card-title activator grey-text text-darken-4" title="Click here for more information">{{ playlist.title }}<i class="material-icons right">more_vert</i></span>
                 <hr>
-                <p><strong>Category: </strong><a href="/my-profile/order-by/category/{{ playlist.category_name }}">{{ playlist.category_name }}</a></p>
+                <p><strong>Category: </strong><a href="/my-profile/order-by/category/{{ playlist.category_name }}" alt="Category" title="Click here to order by category: {{ playlist.category_name }}">{{ playlist.category_name }}</a></p>
                 <div class="card_button">
-                    <a href="{{ playlist.video_source }}" target="_blank" class="waves-effect waves-light btn play_button"><i class="material-icons right">play_circle_filled</i>Watch</a>
+                    <a href="{{ playlist.video_source }}" target="_blank" class="waves-effect waves-light btn play_button" alt="Watch Now" title="Watch video now"><i class="material-icons right">play_circle_filled</i>Watch</a>
                 </div>
                 <br />
-                <a href="/delete/{{ playlist.playlist_id }}" alt="Delete"><i class="material-icons left">delete</i></a>
-                <a href="/edit/{{ playlist.playlist_id }}" alt="Edit"><i class="material-icons left">edit</i></a>
-                &nbsp;
+                <a href="/delete/{{ playlist.playlist_id }}" alt="Delete" title="Delete {{ playlist.title }}"><i class="material-icons left">delete</i></a>
+                <a href="/edit/{{ playlist.playlist_id }}" alt="Edit" title="Edit {{ playlist.title }}"><i class="material-icons left">edit</i></a> &nbsp;
                 <hr>
                 <div class="post-footer">
-                {% set total = 0 %}
-                {% for vote in votes %} 
-                {% if vote.playlist_id == playlist.playlist_id %}
-                {% set total = (total + get_votes(vote.playlist_id)) %}
-                <p class="left"><strong>Votes: </strong>{{ total }}</p>
-                {% break %}
-                {% endif %} 
-                {% endfor %}
-                {% if playlist.origin == 'false' %}
-                <p class="right"><strong>Status: </strong><a href="/my-profile/order-by/saved/1" alt="reposted">Reposted</a></p>
-                {% else %}
-                <p class="right"><strong>Status: </strong><a href="/my-profile/order-by/saved/0" alt="original">Original</a></p>
-                {% endif %}
+                    {% set total = 0 %} 
+                        {% for vote in votes %} 
+                            {% if vote.playlist_id == playlist.playlist_id %} 
+                                {% set total = (total + get_votes(vote.playlist_id)) %}
+                                <p class="left"><strong>Votes: </strong>{{ total }}</p>
+                                {% break %} 
+                            {% endif %} 
+                        {% endfor %} 
+                    {% if playlist.origin == 'false' %}
+                    <p class="right"><strong>Status: </strong><a href="/my-profile/order-by/saved/1" alt="reposted" title="Click here to order by reposted videos">Reposted</a></p>
+                    {% else %}
+                    <p class="right"><strong>Status: </strong><a href="/my-profile/order-by/saved/0" alt="original" title="Click here to order by original videos!">Original</a></p>
+                    {% endif %}
                 </div>
             </div>
             <div class="card-reveal">
