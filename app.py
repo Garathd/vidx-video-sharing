@@ -137,14 +137,14 @@ def dashboard(username):
         userid = db.getUserId(user_name)
         
         # Getting list of my videos
-        playlists = db.getMyPlaylist(userid)
+        videos = db.getMyVideos(userid)
         
         # Getting the vote information
         votes = db.getAllVotes()
         
         return render_template('dashboard.html',
         username=username,
-        playlists=playlists,
+        videos=videos,
         votes=votes,
         get_votes=db.calcVotes)
         
@@ -200,7 +200,7 @@ def videos():
 """
 Create a new video
 """
-@app.route('/new-playlist')
+@app.route('/new-video')
 def newplaylist():
     
     try:
@@ -213,7 +213,7 @@ def newplaylist():
         # Getting list of categories
         categories = db.getCategories()
         
-        return render_template('new-playlist.html', 
+        return render_template('new-video.html', 
         user_name=user_name, 
         userid=userid, 
         categories=categories)
@@ -224,8 +224,8 @@ def newplaylist():
 """
 Add Video to the database
 """
-@app.route('/add-playlist', methods=['GET','POST'])
-def addplaylist():
+@app.route('/add-video', methods=['GET','POST'])
+def addvideo():
     
     # Video's original creator
     origin = "true"
@@ -244,7 +244,7 @@ def addplaylist():
         user_name = db.getLogin()
         
         # Add the Video to the database
-        db.addPlaylist(userid, title, description, image, video, category, origin)
+        db.addVideo(userid, title, description, image, video, category, origin)
         
         return redirect('/{}'.format(user_name))
         
@@ -253,10 +253,10 @@ def addplaylist():
             
             
 """
-Edit video by playlist id
+Edit video by video id
 """
-@app.route('/edit/<playlistid>')
-def edit(playlistid):
+@app.route('/edit/<videoid>')
+def edit(videoid):
     
     try:
         # Getting username
@@ -266,10 +266,10 @@ def edit(playlistid):
         categories = db.getCategories()
         
         # Getting playlists by id
-        playlist = db.getPlaylistById(playlistid)
+        video = db.getVideoById(videoid)
             
-        return render_template('edit-playlist.html', 
-        playlist=playlist,
+        return render_template('edit-video.html', 
+        video=video,
         categories=categories)            
             
     except:
@@ -277,26 +277,26 @@ def edit(playlistid):
     
 
 """
-Edit videos
+Edit video
 """
-@app.route('/edit-playlist', methods=['GET','POST'])
-def editplaylist():
+@app.route('/edit-video', methods=['GET','POST'])
+def editvideo():
     
     if request.method == 'POST':
         form = request.form
-        playlistid = int(form['playlist_id'])
+        videoid = form['video_id']
         title = form['title']
         description = form['description']
         img_source = form['image']
         video_source = form['video']
-        category_id = int(form['category_id'])
+        category_id = form['category_id']
         
     try:
         # Getting username
         user_name = db.getLogin()
         
         # Edit video information in the database
-        db.edit(playlistid, title, description, img_source, video_source, category_id)
+        db.edit(videoid, title, description, img_source, video_source, category_id)
         return redirect('/{}'.format(user_name)) 
     
     except:
@@ -306,15 +306,15 @@ def editplaylist():
 """
 Delete a video
 """
-@app.route('/delete/<playlistid>', methods=['GET','POST'])
-def delete(playlistid):
+@app.route('/delete/<videoid>', methods=['GET','POST'])
+def delete(videoid):
     
     try:
         # Get username
         user_name = db.getLogin()
         
         # Delete the video
-        db.delete(playlistid)
+        db.delete(videoid)
         
         return redirect('/{}'.format(user_name))
     except:
@@ -324,14 +324,14 @@ def delete(playlistid):
 """
 Down vote
 """
-@app.route('/downvote/<playlistid>')
-def downvote(playlistid):
+@app.route('/downvote/<videoid>')
+def downvote(videoid):
     
     # Set vote value
     vote = -1
     
     # Calculating the votes for video
-    total_votes = db.calcVotes(playlistid)
+    total_votes = db.calcVotes(videoid)
     
     if total_votes == None:
         total_votes = 0
@@ -346,21 +346,22 @@ def downvote(playlistid):
             userid = db.getUserId(user_name)
             
             # Make vote
-            db.vote(playlistid, userid, vote)
+            db.vote(videoid, userid, vote)
             return redirect('/videos')
             
         except: 
             redirect('/')   
             
     else:
-         db.delete(playlistid)
+         db.delete(videoid)
          return redirect('/videos')
+ 
  
 """
 Up vote
 """
-@app.route('/upvote/<playlistid>')
-def upvote(playlistid):
+@app.route('/upvote/<videoid>')
+def upvote(videoid):
     
     # Set vote value
     vote = 1
@@ -373,7 +374,7 @@ def upvote(playlistid):
         userid = db.getUserId(user_name)
         
         # Make vote
-        db.vote(playlistid, userid, vote)
+        db.vote(videoid, userid, vote)
         
         return redirect('/videos')
         
@@ -384,8 +385,8 @@ def upvote(playlistid):
 """
 Repost a video
 """
-@app.route('/repost/<playlistid>')
-def repost(playlistid):
+@app.route('/repost/<videoid>')
+def repost(videoid):
     
     # Video's original creator
     origin = "false"
@@ -398,17 +399,17 @@ def repost(playlistid):
         userid = db.getUserId(user_name)
         
         # Get playlist by id
-        playlist = db.getPlaylistById(playlistid)
+        video = db.getVideoById(videoid)
         
         # Setting variables with copied video data
-        title = playlist['title']
-        description = playlist['description']
-        img_source = playlist['img_source']
-        video_source = playlist['video_source']
-        category_id = playlist['category_id']
+        title = video['title']
+        description = video['description']
+        img_source = video['img_source']
+        video_source = video['video_source']
+        category_id = video['category_id']
         
         # Adding video to database
-        db.addPlaylist(userid, title, description, img_source, video_source, category_id, origin)
+        db.addVideo(userid, title, description, img_source, video_source, category_id, origin)
         
         return redirect('/{}'.format(user_name))
         
@@ -442,7 +443,7 @@ def orderprofilecategory(category_name):
         ordered = db.orderByCategory(category_id, userid, profile)
         
         return render_template('dashboard.html', 
-        playlists=ordered, 
+        videos=ordered, 
         username=user_name,
         votes=votes,
         get_votes=db.calcVotes)
@@ -471,7 +472,7 @@ def ordersaved(status):
         ordered = db.orderBySaved(userid, status)
         
         return render_template('dashboard.html', 
-        playlists=ordered, 
+        videos=ordered, 
         username=user_name,
         votes=votes,
         get_votes=db.calcVotes)  

@@ -132,13 +132,13 @@ def getUserId(username):
 """
 Get My Videos
 """
-def getMyPlaylist(userid):
+def getMyVideos(userid):
     
     db = database()
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, p.origin, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = '{}' ORDER BY p.playlist_id DESC".format(userid)
+          sql = "SELECT v.video_id, v.title, v.description, v.img_source, v.video_source, v.origin, u.username, c.category_name FROM videos v INNER JOIN users u ON v.user_id = u.user_id INNER JOIN categories c ON v.category_id = c.category_id WHERE u.user_id = '{}' ORDER BY v.video_id DESC".format(userid)
           cursor.execute(sql)
           result = cursor.fetchall()
           
@@ -160,7 +160,7 @@ def getOtherVideos(userid):
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != '{}' AND origin = 'true' ORDER BY p.playlist_id DESC".format(userid)
+          sql = "SELECT v.video_id, v.title, v.description, v.img_source, v.video_source, u.username, c.category_name FROM videos v INNER JOIN users u ON v.user_id = u.user_id INNER JOIN categories c ON v.category_id = c.category_id WHERE u.user_id != '{}' AND origin = 'true' ORDER BY v.video_id DESC".format(userid)
           cursor.execute(sql)
           result = cursor.fetchall()
           
@@ -174,17 +174,17 @@ def getOtherVideos(userid):
     
     
 """
-Get Playlist By ID
+Get video By ID
 """
-def getPlaylistById(playlist_id):
+def getVideoById(video_id):
     
-    playlistid = int(playlist_id)
+    videoid = int(video_id)
     
     db = database()
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          sql = "SELECT * FROM playlists WHERE playlist_id = {}".format(playlistid)
+          sql = "SELECT * FROM videos WHERE video_id = {}".format(videoid)
           cursor.execute(sql)
           result = cursor.fetchone()
           
@@ -200,11 +200,11 @@ def getPlaylistById(playlist_id):
 """
 Add a new video 
 """
-def addPlaylist(user_id, title, description, image, video, category_id, origin):
+def addVideo(user_id, title, description, image, video, category_id, origin):
     
     db = database()
     
-    sql = "INSERT INTO playlists(user_id, title, description, img_source, video_source, category_id, origin) VALUES ({0}, '{1}', '{2}','{3}', '{4}', {5}, '{6}')".format(user_id, title, description, image, video, category_id, origin)
+    sql = "INSERT INTO videos(user_id, title, description, img_source, video_source, category_id, origin) VALUES ({0}, '{1}', '{2}','{3}', '{4}', {5}, '{6}')".format(user_id, title, description, image, video, category_id, origin)
 
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
@@ -221,11 +221,11 @@ def addPlaylist(user_id, title, description, image, video, category_id, origin):
 """
 Delete a video   
 """
-def delete(playlistid):
+def delete(videoid):
     
     db =  database()
     
-    sql = "DELETE FROM playlists WHERE playlist_id = {}".format(playlistid)
+    sql = "DELETE FROM videos WHERE video_id = {}".format(videoid)
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
@@ -242,11 +242,11 @@ def delete(playlistid):
 """
 Edit a video
 """
-def edit(playlistid, title, description, img_source, video_source, category_id):
+def edit(videoid, title, description, img_source, video_source, category_id):
     
     db =  database()
     
-    sql = "UPDATE playlists SET title = '{1}', description = '{2}', img_source = '{3}', video_source = '{4}', category_id = {5} WHERE playlist_id = {0}".format(playlistid, title, description, img_source, video_source, category_id)
+    sql = "UPDATE videos SET title = '{1}', description = '{2}', img_source = '{3}', video_source = '{4}', category_id = {5} WHERE video_id = {0}".format(videoid, title, description, img_source, video_source, category_id)
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
@@ -271,9 +271,9 @@ def orderByCategory(ordering, userid, profile):
     
     # If it's my profile show my video list otherwise show peoples original videos
     if profile == True:
-        sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {0} ORDER BY p.category_id = {1} DESC".format(userid,category_id)
+        sql = "SELECT v.video_id, v.title, v.description, v.origin, v.img_source, v.video_source, u.username, c.category_name FROM videos v INNER JOIN users u ON v.user_id = u.user_id INNER JOIN categories c ON v.category_id = c.category_id WHERE u.user_id = {0} ORDER BY v.category_id = {1} DESC".format(userid,category_id)
     else:
-        sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != {0} AND p.origin = 'true' ORDER BY p.category_id = {1} DESC".format(userid,category_id)
+        sql = "SELECT v.video_id, v.title, v.description, v.origin, v.img_source, v.video_source, u.username, c.category_name FROM videos v INNER JOIN users u ON v.user_id = u.user_id INNER JOIN categories c ON v.category_id = c.category_id WHERE u.user_id != {0} AND v.origin = 'true' ORDER BY v.category_id = {1} DESC".format(userid,category_id)
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
@@ -298,9 +298,9 @@ def orderBySaved(userid, saved):
     
     # Checking if the video is an original or a repost
     if int(saved) == 1:
-        sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {} ORDER BY p.origin='false' DESC".format(userid)
+        sql = "SELECT v.video_id, v.title, v.description, v.origin, v.img_source, v.video_source, u.username, c.category_name FROM videos v INNER JOIN users u ON v.user_id = u.user_id INNER JOIN categories c ON v.category_id = c.category_id WHERE u.user_id = {} ORDER BY v.origin='false' DESC".format(userid)
     else:
-        sql = "SELECT p.playlist_id, p.title, p.description, p.origin, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id = {} ORDER BY p.origin='true' DESC".format(userid)
+        sql = "SELECT v.video_id, v.title, v.description, v.origin, v.img_source, v.video_source, u.username, c.category_name FROM videos v INNER JOIN users u ON v.user_id = u.user_id INNER JOIN categories c ON v.category_id = c.category_id WHERE u.user_id = {} ORDER BY v.origin='true' DESC".format(userid)
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
@@ -325,7 +325,7 @@ def orderByUser(users_id, my_id):
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-          sql = "SELECT p.playlist_id, p.title, p.description, p.img_source, p.video_source, u.username, c.category_name FROM playlists p INNER JOIN users u ON p.user_id = u.user_id INNER JOIN categories c ON p.category_id = c.category_id WHERE u.user_id != {0} AND p.origin = 'true' ORDER BY p.user_id = {1} DESC".format(my_id,users_id)
+          sql = "SELECT v.video_id, v.title, v.description, v.img_source, v.video_source, u.username, c.category_name FROM videos v INNER JOIN users u ON v.user_id = u.user_id INNER JOIN categories c ON v.category_id = c.category_id WHERE u.user_id != {0} AND v.origin = 'true' ORDER BY v.user_id = {1} DESC".format(my_id,users_id)
           cursor.execute(sql)
           result = cursor.fetchall()
           
@@ -405,15 +405,15 @@ def getAllVotes():
     
     
 """
-Check if a user has voted on a specific playlist
+Check if a user has voted on a specific video
 """
-def checkVote(user_id, playlist_id):
+def checkVote(user_id, video_id):
     
     db = database()
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-            sql = "SELECT COUNT(vote) AS count, vote as vote FROM votes WHERE playlist_id = {0} AND user_id = {1}".format(playlist_id,user_id)
+            sql = "SELECT COUNT(vote) AS count, vote as vote FROM votes WHERE video_id = {0} AND user_id = {1}".format(video_id, user_id)
             cursor.execute(sql)
             result = cursor.fetchone()
 
@@ -429,13 +429,13 @@ def checkVote(user_id, playlist_id):
 """
 Calculate to the total amount of votes of a specific video
 """
-def calcVotes(playlist_id):
+def calcVotes(video_id):
     
     db = database()
     
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-            sql = "SELECT SUM(vote) as count FROM votes WHERE playlist_id = {}".format(playlist_id)
+            sql = "SELECT SUM(vote) as count FROM votes WHERE video_id = {}".format(video_id)
             cursor.execute(sql)
             result = cursor.fetchone()
             return result['count']
@@ -450,13 +450,13 @@ def calcVotes(playlist_id):
 """
 Register a users vote for a specific video
 """
-def vote(playlist_id, user_id, result):
+def vote(video_id, user_id, result):
     
     db = database()
 
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-            sql = "INSERT INTO votes(playlist_id, user_id, vote) VALUES ({0}, {1}, '{2}')".format(playlist_id, user_id, result)
+            sql = "INSERT INTO votes(video_id, user_id, vote) VALUES ({0}, {1}, '{2}')".format(video_id, user_id, result)
             cursor.execute(sql)
             db.commit()
             

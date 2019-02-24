@@ -14,11 +14,11 @@
                     <a href="{{ video.video_source }}" target="_blank" class="waves-effect waves-light btn play_button" alt="Watch Now" title="Watch video now"><i class="material-icons right">play_circle_filled</i>Watch</a>
                 </div>
                 <br />
-                <a href="/repost/{{ video.playlist_id }}" alt="Repost" title="Save video to your profile"><i class="material-icons">save</i></a> 
-                {% set voted = check_voted(userid, video.playlist_id) %} 
+                <a href="/repost/{{ video.video_id }}" alt="Repost" title="Save video to your profile"><i class="material-icons">save</i></a> 
+                {% set voted = check_voted(userid, video.video_id) %} 
                 {% if voted['count'] == 0 %}
-                <a href="/downvote/{{ video.playlist_id }}" alt="DownVote" title="Down vote this video"><i class="down-vote material-icons">arrow_downward</i></a>
-                <a href="/upvote/{{ video.playlist_id }}" alt="UpVote" title="Up vote this video"><i class="up-vote material-icons">arrow_upward</i></a> 
+                <a href="/downvote/{{ video.video_id }}" alt="DownVote" title="Down vote this video"><i class="down-vote material-icons">arrow_downward</i></a>
+                <a href="/upvote/{{ video.video_id }}" alt="UpVote" title="Up vote this video"><i class="up-vote material-icons">arrow_upward</i></a> 
                 {% else %} 
                         {% if voted['vote'] == 1 %}
                         <i class="voted material-icons" title="You have up voted this video">arrow_upward</i> 
@@ -29,8 +29,8 @@
                 <hr /> 
                 {% set total = 0 %} 
                 {% for vote in votes %} 
-                    {% if vote.playlist_id == video.playlist_id %} 
-                    {% set total = (total + get_votes(vote.playlist_id)) %}
+                    {% if vote.video_id == video.video_id %} 
+                    {% set total = (total + get_votes(vote.video_id)) %}
                     <p class="left"><strong>Votes: </strong>{{ total }}</p>
                     {% break %} 
                     {% endif %} 
