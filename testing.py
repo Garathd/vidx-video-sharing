@@ -3,15 +3,15 @@ import unittest
 import pymysql
 import db
 
-# Setting and Getting for test playlist id
-playlist_id = ""
+# Setting and Getting for test video id
+video_id = ""
 
-def setPlaylistId(set_id):
-    global playlist_id
-    playlist_id = set_id
+def setVideoId(set_id):
+    global video_id
+    video_id = set_id
         
-def getPlaylistId():
-    return playlist_id
+def getVideoId():
+    return video_id
     
 class tests(unittest.TestCase):
     
@@ -67,7 +67,7 @@ class tests(unittest.TestCase):
     Testing getting a users list of videos
     """    
     def testE(self):
-        result = db.getMyPlaylist(tests.user_id)
+        result = db.getMyVideos(tests.user_id)
         self.assertTrue(result)
         
         
@@ -83,7 +83,7 @@ class tests(unittest.TestCase):
     Testing Add a new video 
     """
     def testG(self):
-        db.addPlaylist(tests.user_id, 
+        db.addVideo(tests.user_id, 
         tests.title, 
         tests.description, 
         tests.image, 
@@ -95,27 +95,27 @@ class tests(unittest.TestCase):
     
         try:
             with dbc.cursor(pymysql.cursors.DictCursor) as cursor:
-              sql = "SELECT playlist_id FROM playlists WHERE title = '{}'".format(tests.title)
+              sql = "SELECT video_id FROM videos WHERE title = '{}'".format(tests.title)
               cursor.execute(sql)
               result = cursor.fetchone()
               
-              # Setting the playlist id of test video
-              playlist_id = result['playlist_id']
-              setPlaylistId(playlist_id)
+              # Setting the video id of test video
+              video_id = result['video_id']
+              setVideoId(video_id)
               
         except Exception as e:
             print(e)    
               
         finally:
             dbc.close()
-            self.assertEqual(playlist_id, getPlaylistId())
+            self.assertEqual(video_id, getVideoId())
             
             
     """
-    Test get Playlist By ID  
+    Test get Video By ID  
     """
     def testH(self):
-        value = db.getPlaylistById(getPlaylistId())
+        value = db.getVideoById(getVideoId())
         self.assertTrue(value)        
             
             
@@ -129,7 +129,7 @@ class tests(unittest.TestCase):
         new_description = "Test"
         
         db.edit(
-        getPlaylistId(), 
+        getVideoId(), 
         new_title, 
         new_description, 
         tests.image, 
@@ -188,16 +188,16 @@ class tests(unittest.TestCase):
     Testing Register a users vote and check if they voted
     """
     def testO(self):
-        db.vote(getPlaylistId(), tests.user_id, 1)
-        calc = db.calcVotes(getPlaylistId())
+        db.vote(getVideoId(), tests.user_id, 1)
+        calc = db.calcVotes(getVideoId())
         self.assertGreater(calc, 0)
         
         
     """
-    Testing if user has voted on a specific playlist
+    Testing if user has voted on a specific video
     """
     def testP(self):
-        result = db.checkVote(tests.user_id, getPlaylistId())
+        result = db.checkVote(tests.user_id, getVideoId())
         self.assertEqual(result['count'], 1)
         
         
@@ -205,7 +205,7 @@ class tests(unittest.TestCase):
     Testing calculate the total amount of votes of a specific video
     """
     def testQ(self):
-        result = db.calcVotes(getPlaylistId())
+        result = db.calcVotes(getVideoId())
         self.assertGreater(result, 0)
         
     
@@ -218,11 +218,11 @@ class tests(unittest.TestCase):
 
 
     """
-    Testing delete by playlist id
+    Testing delete by video id
     """
     def testS(self):
-        playlistid = getPlaylistId()
-        db.delete(playlistid)
+        videoid = getVideoId()
+        db.delete(videoid)
         
         
         
