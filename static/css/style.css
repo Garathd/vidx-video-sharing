@@ -133,16 +133,13 @@ nav .menu-button a:hover {
 .down-vote {
   color: red !important; }
 
-.welcome {
-  margin-top: 7.5% !important; }
+.welcome h1, .welcome h2 {
+  margin: 3% 0 2% 0 !important; }
 
 .live-icon {
   color: #007bff; }
 
-.welcome-list li {
-  margin-bottom: 1.5%; }
-
-.welcome-list > li > i {
+.legend i {
   padding-top: 1.5%; }
 
 @media only screen and (min-width: 992px) {
@@ -158,7 +155,10 @@ nav .menu-button a:hover {
 
 @media only screen and (max-width: 640px) {
   .save-button {
-    padding-top: 1.5% !important; } }
+    padding-top: 1.5% !important; }
+  .welcome h1,
+  .welcome h2 {
+    margin: 5% 0 5% 0 !important; } }
 
 @media only screen and (max-width: 320px) {
   .save-button {

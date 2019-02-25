@@ -2,34 +2,50 @@
 <div class="row">
     <div class="col-md-12">
         <div class="welcome">
-            <h1>Welcome User</h1>
 
-            <p>This Website is for the ability to upload your favorite videos and to up/down vote videos that other users have uploaded</p>
+            <h1>Welcome {{ username }}</h1>
 
+            <p>This Website lets you upload your favorite videos. You can also view other users videos and vote on them</p>
+
+            <p>If a video gets a vote score of -5 then the video gets deleted from the website so keep that in mind and only post quality content!</p>
+
+            <p>You can also repost(save) a video of another users to your videos page and this will have a status of reposted. Reposted videos can't be viewed or voted on by other users and are only viewable on the My Videos sections</p>
+
+            <p>The My Videos section is only visible once you save a video to your profile or unless you create a <a href="/new-video">new video</a></p>
+
+            <hr />
             <h2>Instructions</h2>
-            <ul class="welcome-list">
-                <li><i class="live-icon material-icons">save</i> Save video to your profile
+
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <i class="live-icon material-icons">save</i><div class="legend"> Save video to your profile</div>
                     <hr/>
-                </li>
-                <li><i class="down-vote material-icons">arrow_downward</i> Down vote a video
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <i class="down-vote material-icons">arrow_downward</i><div class="legend"> Down vote a video</div>
                     <hr/>
-                </li>
-                <li><i class="up-vote material-icons">arrow_upward</i> Up vote a video
+                </div>
+                <div class="col-lg-4 col-md-12">
+                   <i class="up-vote material-icons">arrow_upward</i> <div class="legend"> Up vote a video</div>
                     <hr/>
-                </li>
-                <li><i class="material-icons">arrow_downward</i> Down Voted
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <i class="material-icons">arrow_downward</i><div class="legend"> Down Voted</div>
                     <hr/>
-                </li>
-                <li><i class="material-icons">arrow_upward</i> Up Voted
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <i class="material-icons">arrow_upward</i><div class="legend"> Up Voted</div>
                     <hr/>
-                </li>
-                <li><i class="live-icon material-icons">edit</i> Edit a video
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <i class="live-icon material-icons">edit</i><div class="legend"> Edit a video</div>
                     <hr/>
-                </li>
-                <li><i class="live-icon material-icons">delete</i> Delete a video
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <i class="live-icon material-icons">delete</i><div class="legend"> Delete a video</div>
                     <hr/>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

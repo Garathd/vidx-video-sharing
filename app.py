@@ -32,9 +32,17 @@ Welcome Page
 """
 @app.route('/welcome')
 def welcome():
-    return render_template('welcome.html')
     
-   
+    try:
+        username = db.getLogin()
+        if username:
+            return render_template('welcome.html', username=username)
+        else: 
+            return redirect('/')
+    
+    except:
+        return redirect('/')
+            
 """
 User Logout
 """
@@ -161,6 +169,10 @@ def dashboard(username):
         
         # Getting list of my videos
         videos = db.getMyVideos(userid)
+   
+        if not videos:
+            return redirect('/welcome')
+
         
         # Getting the vote information
         votes = db.getAllVotes()
