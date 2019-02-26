@@ -27,14 +27,16 @@ body {
   font-weight: 600 !important; }
 
 .credentials {
-  background-color: #3f51b5 !important; }
+  background-color: #3f51b5 !important;
+  text-align: center; }
 
 .login-heading {
   font-weight: 500 !important;
   color: #FFFFFF !important; }
 
 .title h1 {
-  color: #FFFFFF !important; }
+  color: #FFFFFF !important;
+  text-align: center; }
 
 .user-action-link a {
   color: #FFFFFF !important; }

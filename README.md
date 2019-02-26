@@ -4,11 +4,31 @@ This project is inspired by looking for streams and finding dead links to a TV S
 
 If a video link is rated -5 then the video gets deleted from the database unless someone else has saved (reposted) the video to their profile and in this circumstance a reposted (saved) video is only viewable and accessible to the user that has saved it.
 
+
 ## UX
+
+The clients requirements are:
+
+- To be able to register and sign into an account
+- To be able to create, edit, delete and view videos on their account
+- To be able to save other users videos on their profile
+- To be able to up vote and down vote on videos of other users
+- For videos to be deleted if the get -5 in vote score
 
 ## Design
 
+My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. There was really no need to use any wirefram. I have a few small sketches as I more or less knew in my head how I wanted the site to look.
+
 ## Features
+
+The features of this application are as follows:
+
+- Ability to Register and Sign Into an Account
+- Ability to Create, Edit, Delete and View Videos
+- Ability to Repost videos to your profile page
+- Ability to vote on videos and if video has score of -5 then the ability to automatically delete them
+- Ability to see if voted on a particular video and to view its voting score
+- Ability to order by Category, Username, Reposted Videos and Original Videos
 
 ## Features Left to Implement
 
@@ -18,7 +38,7 @@ Also another thing I have really considered but I think would be potentially bet
 
 If I was to get more users with more videos I would definitely implement the menu seperation of categories and also add a feature to each video to report users if content is deemed innappropiate by users. If someone gets 3 reports on their account then their profile is automatiacally deleted from the system. It works more or less the same as if a video gets -5 vote on a video. 
 
-I think another cool feature would be if a username is clicked then it brings you that users profile where you can see information about them as well as posts on their page. The way it currently works is that if a username is clicked than the videos are ordered by that user.
+I think another cool feature would be if a username is clicked then it brings you that users profile where you can see information about them as well as posts on their page and also the ability to send messages to other users. The way it currently works is that if a username is clicked than the videos are ordered by that user.
 
 The ability to search videos is also a feature I would definitely implement at a latter stage if I was to get more videos and it was something initially that I was seriously considering doing in the first version of this application.
 
@@ -32,6 +52,15 @@ Flask is the Python Framework I’m using for this application
 ### CSS
 
 I'm using SCSS to build my css stylesheets and probably a little unconventially I'm using [Materialize](https://materializecss.com/) and also [Bootstrap 4](https://getbootstrap.com/). To be honest though it doesn't seem to have any adverse effects and over all looks better and is more responsive and visually pleasing out of the box when used together than individually. It was intially a mistake on my part but ended up looking pretty good. I also did a little research and decided to use the two of them after reading this [article](https://stackoverflow.com/questions/28613848/is-it-possible-to-integrate-materializecss-into-bootstrap). I also tried Material Design for bootstrap but wasn't happy with the way it looked
+
+### JQuery
+
+I have only used minimal JQuery. I have used it for the scroll to top button, the mobile menu and for select options for the forms in materialize.
+
+### Gulp
+
+Using Gulp to watch out for SCSS changes and converting SCSS to CSS
+
 
 
 ## Testing

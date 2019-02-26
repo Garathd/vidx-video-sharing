@@ -3,7 +3,7 @@
     <form action="/add-video" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s12">
-                <input type="hidden" id="user_id" name="user_id" value="{{userid}}" type="text" class="validate" required>
+                <input type="hidden" id="user_id" name="user_id" value="{{userid}}" class="validate">
             </div>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
                 <label>Category</label>
             </div>
         </div>
-         <button autofocus class="waves-effect waves-light btn right save-button"><i class="material-icons save-icon right">send</i>Post</a>
+         <button autofocus class="waves-effect waves-light btn right save-button"><i class="material-icons save-icon right">send</i>Post</button>
     </form>
 </div>
 {% endblock %}

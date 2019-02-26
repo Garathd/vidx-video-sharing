@@ -3,7 +3,7 @@
     <form action="/edit-video" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s12">
-                <input type="hidden" id="video_id" name="video_id" value="{{ video.video_id }}" type="text" class="validate" required>
+                <input type="hidden" id="video_id" name="video_id" value="{{ video.video_id }}" class="validate">
             </div>
         </div>
         <div class="row">
@@ -32,7 +32,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <select name="category_id" required>
+                <select name="category_id">
                   {% for cat in categories %}
                       {% if video.category_id == cat.category_id %}
                       <option selected value="{{cat.category_id}}">{{cat.category_name}}</option>
@@ -44,7 +44,7 @@
                 <label>Category</label>
             </div>
         </div>
-         <button autofocus class="waves-effect waves-light btn right save-button"><i class="material-icons save-icon right">save</i>Save</a>
+         <button autofocus class="waves-effect waves-light btn right save-button"><i class="material-icons save-icon right">save</i>Save</button>
     </form>
 </div>
 {% endblock %}
