@@ -14,13 +14,18 @@ $('.datepicker').pickadate({
     closeOnSelect: false // Close upon selecting a date,
 });
 
-//Scroll to top button
-// var scrollTop = $("#scrollTop");
+var btn = $('#the-top');
 
-// $(scrollTop).click(function() {
-//     $('html, body').animate({
-//         scrollTop: 0
-//     }, 800);
-//     return false;
+$(window).scroll(function() {
+    if($(window).scrollTop() > 300){
+        btn.addClass('show');
+    } else{
+        btn.removeClass('show');
+    }
+});
 
-// });
+btn.on('click', function(e) {
+    e.preventDefault();
+    $('html, body').animate({scrollTop:0},
+    '300');
+});
