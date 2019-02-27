@@ -17,16 +17,29 @@ The clients requirements are:
 - To be able to up vote and down vote on videos of other users
 - For videos to be deleted if they get a -5 in vote score
 - To be able to view vote scores
-- To be able to see what I voted
+- To be able to see what they voted
+
 
 User stories:
 
+- As a user I want to be able to create an account
+- As a user I want to be able to create, edit and delete videos
+- As a user I want to view other users videos
+- As a user I want the ability to save other users videos
+- As a user I want to be able to vote on other users videos as well as them with my videos
+- As a user I want be able to see a videos score
+- As a user I want to see if I have already voted on a video
+- As a user I want to be able to log out of my account
+
+
 ## Design
+
+### Front-End
 
 My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. There was really no need to use any wirefram. I have a few small sketches as I more or less knew in my head how I wanted the site to look.
 
 
-## Backend (MySQL Database)
+### Back-End (MySQL Database)
 
 My backend consists of a relatively simple MySQL database. For testing and Development I use the local [Cloud 9](https://aws.amazon.com/cloud9/?origin=c9io) Database and then for the live version I use the [ClearDB](https://elements.heroku.com/addons/cleardb) heroku add on. The databases can be set in the applications db.py file with options for local or remote databases.
 
@@ -37,9 +50,13 @@ My Database consists of 4 tables:
 - ***categories***
 - ***votes***
 
+I had to set ``` ON DELETE CASCASE ``` on the *video id* FOREIGN KEY on the ***votes*** table that REFERENCES the *video id* PRIMARY KEY on the *** videos *** table. This was to ensure that if a video got deleted than all correpsonding vote data would be deleted 
+
+
 The dump file for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/dump.sql)
 
-The ER Diagram for my database
+### The ER Diagram for my database:
+
 ![alt text](https://github.com/Garathd/milestone-project-4/blob/master/images/ER-Diagram.png)
 
 
@@ -54,10 +71,10 @@ The features of this application are as follows:
 - Ability to see if voted on a particular video and to view its voting score
 - Ability to order by Category, Username, Reposted Videos and Original Videos
 
+
 ## Features Left to Implement
 
 I still feel I could add a lot of features some more essential than others. I think the most essential thing would be a better authentication set up and the use of sessions. The way the user authentication works currently is that if a username and password is found in the database upon login check it saves the username in a global variable which is then used throughout the application to query different stuff from the database. 
-
 Also another thing I have really considered but I think would be potentially better at a future stage is to have each of the video categories as sub menu items to the All Videos menu item. It would definitely make it easier for users to find videos of a specific category. But then the more I thought about it I realised that if I only initially had a small number of users with below 200 videos in total it miight be better for them to scroll through all the videos and vote up or down on the videos. If a user got sick of seeing the same videos they would more than likely vote down a video ensuring that below par or questionable posts can be removed quicker.
 
 If I was to get more users with more videos I would definitely implement the menu seperation of categories and also add a feature to each video to report users if content is deemed innappropiate by users. If someone gets 3 reports on their account then their profile is automatiacally deleted from the system. It works more or less the same as if a video gets -5 vote on a video. 
@@ -86,7 +103,6 @@ I have only used minimal JQuery. I have used it for the scroll to top button, th
 Using Gulp to watch out for SCSS changes and converting SCSS to CSS
 
 
-
 ## Testing
 
 ### Manual Testing
@@ -95,6 +111,31 @@ After running each possible scenario multiple times, going over each feature, us
 
 - [HTML Validation](https://www.freeformatter.com/html-validator.html)
 - [CSS Validation](https://jigsaw.w3.org/css-validator/)
+
+
+#### Scenarios
+
+- Try register a user that already exists on the system
+- Register a new user
+- Login with incorrect details
+- Login in with correct details
+- Create a new video
+- Edit a video
+- Delete a video
+- Share a video
+- Vote Up a video
+- Vote Down a video
+- Vote Down a video to -5 and see if it gets deleted
+- Order profile videos by Reposted and Original
+- Order profile videos by Category
+- Order all videos by User
+- Order all videos by Category
+- Edit a video using the url and video id for a video that is mine
+- Edit a video using the url and video id for a video that is another users video
+- Delete a video using the url and video id for a video that is mine
+- Delete a video using the url and video id for a video that is another users video
+- Logout
+
 
 ### Unit Testing
 
@@ -145,7 +186,8 @@ During development, all code was written in Cloud 9 and updates were saved and t
 
 The development version of my application is on github and I push this code using *git push origin master* and the code is run and tested on Cloud 9 before being updated to heroku
 
-The production version of my application is deployed to heroku and I push this code using *git push heroku*  [milestone-project-4](https://milestone-project-4.herokuapp.com/).
+The production version of my application is deployed to heroku and I push this code using *git push heroku*  and the live application can be found [here](https://milestone-project-4.herokuapp.com/).
+
 
 ### Heroku Deployment Steps
 
@@ -157,9 +199,13 @@ The production version of my application is deployed to heroku and I push this c
 5. Restart all dynos
 6. Finally do an initial git commit and push to heroku
 
+
 ## Content and Media
 
 All content and media on this application comes from whatever the users decide to upload and it's very existence on the system depends on whether user videos can retain a vote score of over -5
 
+
 ## Acknowledgements
 
+[ER Diagram Generator](https://app.sqldbm.com)
+[ClearDB](https://elements.heroku.com/addons/cleardb)
