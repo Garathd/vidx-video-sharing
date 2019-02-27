@@ -39,7 +39,8 @@ My Database consists of 4 tables:
 
 The dump file for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/dump.sql)
 
-The ER Diagram for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/ER-Diagram.png)
+The ER Diagram for my database
+![alt text](https://github.com/Garathd/milestone-project-4/blob/master/images/ER-Diagram.png)
 
 
 ## Features
