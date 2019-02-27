@@ -7,6 +7,8 @@ If a video link is rated -5 then the video gets deleted from the database unless
 
 ## UX
 
+My UX process was to analyze the customers requirements and try and think of different ways to incorporate this into not only just a website but a website that is user friendly and easy to navigate.
+
 The clients requirements are:
 
 - To be able to register and sign into an account
@@ -14,10 +16,16 @@ The clients requirements are:
 - To be able to save other users videos on their profile
 - To be able to up vote and down vote on videos of other users
 - For videos to be deleted if the get -5 in vote score
+- 
+
+User stories:
 
 ## Design
 
 My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. There was really no need to use any wirefram. I have a few small sketches as I more or less knew in my head how I wanted the site to look.
+
+## Backend (MySQL Database)
+Coming Soon....
 
 ## Features
 
@@ -67,6 +75,11 @@ Using Gulp to watch out for SCSS changes and converting SCSS to CSS
 
 ### Manual Testing
 
+After running each possible scenario multiple times, going over each feature, user stories and client requirements I then validated my HTML and CSS using the following:
+
+- [HTML Validation](https://www.freeformatter.com/html-validator.html)
+- [CSS Validation](https://jigsaw.w3.org/css-validator/)
+
 ### Unit Testing
 
 This project has 19 Unit Tests overall:
@@ -112,11 +125,25 @@ This project has 19 Unit Tests overall:
 
 ## Deployment
 
+During development, all code was written in Cloud 9 and updates were saved and tested locally. Throughout the process I used [GitHub](https://github.com/Garathd/milestone-project-4) to keep track of changes and to maintain version control in my code base.
+
+The development version of my application is on github and I push this code using *git push origin master* and the code is run and tested on Cloud 9 before being updated to heroku
+
+The production version of my application is deployed to heroku and I push this code using *git push heroku*  [milestone-project-4](https://milestone-project-4.herokuapp.com/).
+
 ### Heroku Deployment Steps
 
-## Content
+1. Go to the Heroku Website and create new app
+2. Create requirements.txt and Procfile to tell heroku what is required to run the app
+3. Login into Heroku Account via command line and add the newly created app
+4. Go back to Heroku Website and in the settings tab click *Reveal Config Vars* and add IP and PORT vars from Project Config
+5. Install [ClearDB](https://elements.heroku.com/addons/cleardb) and import local MySQL Database dump.sql
+5. Restart all dynos
+6. Finally do an initial git commit and push to heroku
 
-## Media
+## Content and Media
+
+All content and media on this application comes from whatever the users decide to upload and it's very existence on the system depends on whether user videos can retain a vote score of over -5
 
 ## Acknowledgements
 

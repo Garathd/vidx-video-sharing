@@ -297,16 +297,23 @@ def edit(videoid):
         # Getting username
         user_name = db.getLogin()
         
+        # Getting user id
+        userid = db.getUserId(user_name)
+        
         # Getting categories list
         categories = db.getCategories()
         
         # Getting playlists by id
         video = db.getVideoById(videoid)
+
+        # Checks to make sure video belongs to the user editing the video.
+        if int(userid) == int(video['user_id']):
+            return render_template('edit-video.html', 
+            video=video,
+            categories=categories)  
             
-        return render_template('edit-video.html', 
-        video=video,
-        categories=categories)            
-            
+        else:
+            return redirect('/profile')
     except:
         return redirect('/')
     
@@ -348,10 +355,21 @@ def delete(videoid):
         # Get username
         user_name = db.getLogin()
         
-        # Delete the video
-        db.delete(videoid)
+        # Getting playlists by id
+        video = db.getVideoById(videoid)
         
-        return redirect('/{}'.format(user_name))
+        # Getting user id
+        userid = db.getUserId(user_name)
+
+        # Checks to make sure video belongs to the user deleting the video via the url.
+        if int(userid) == int(video['user_id']):
+            # Delete the video
+            db.delete(videoid)
+            return redirect('/{}'.format(user_name))
+        
+        else: 
+            return redirect('/profile')
+       
     except:
         return redirect('/')
         
