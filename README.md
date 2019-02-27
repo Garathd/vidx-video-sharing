@@ -25,6 +25,7 @@ User stories:
 
 My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. There was really no need to use any wirefram. I have a few small sketches as I more or less knew in my head how I wanted the site to look.
 
+
 ## Backend (MySQL Database)
 
 My backend consists of a relatively simple MySQL database. For testing and Development I use the local [Cloud 9](https://aws.amazon.com/cloud9/?origin=c9io) Database and then for the live version I use the [ClearDB](https://elements.heroku.com/addons/cleardb) heroku add on. The databases can be set in the applications db.py file with options for local or remote databases.
@@ -38,7 +39,7 @@ My Database consists of 4 tables:
 
 The dump file for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/dump.sql)
 
-The ER Diagram for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/dump.sql)
+The ER Diagram for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/ER-Diagram.png)
 
 
 ## Features
