@@ -50,7 +50,7 @@ My Database consists of 4 tables:
 - ***categories***
 - ***votes***
 
-I had to set ``` ON DELETE CASCASE ``` on the *video id* FOREIGN KEY on the ***votes*** table that REFERENCES the *video id* PRIMARY KEY on the *** videos *** table. This was to ensure that if a video got deleted than all correpsonding vote data would be deleted 
+I had to set ``` ON DELETE CASCASE ``` on the *video id* FOREIGN KEY on the ***votes*** table that REFERENCES the *video id* PRIMARY KEY on the ***videos*** table. This was to ensure that if a video got deleted than all correpsonding vote data would be deleted 
 
 
 The dump file for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/dump.sql)
@@ -207,5 +207,5 @@ All content and media on this application comes from whatever the users decide t
 
 ## Acknowledgements
 
-[ER Diagram Generator](https://app.sqldbm.com)
-[ClearDB](https://elements.heroku.com/addons/cleardb)
+- [ER Diagram Generator](https://app.sqldbm.com)
+- [ClearDB](https://elements.heroku.com/addons/cleardb)
