@@ -36,7 +36,7 @@ User stories:
 
 ### Front-End
 
-My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. There was really no need to use any wirefram. I have a few small sketches as I more or less knew in my head how I wanted the site to look.
+My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. I have a few small sketches as I more or less knew in my head how I wanted the site to look. I done my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be be found in the [mockups folder](ds) 
 
 
 ### Back-End (MySQL Database)
