@@ -122,6 +122,10 @@ Using Gulp to watch out for SCSS changes and converting SCSS to CSS
 
 ### Manual Testing
 
+For manual testing I have tested on the following browsers. *Firefox*, *Chrome*, *Edge* and *IE11*. I had to add some css fixes for both Microsoft Browsers.
+
+I used an Alcatel U5 for mobile phone resolution testing and a Dell Inspiron 5567 for all other testing.
+
 After running each possible scenario multiple times, going over each feature, user stories and client requirements I then validated my HTML and CSS using the following:
 
 - [HTML Validation](https://www.freeformatter.com/html-validator.html)

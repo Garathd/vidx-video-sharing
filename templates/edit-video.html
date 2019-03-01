@@ -8,25 +8,25 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter video title" value="{{ video.title }}" name="title" id="title" type="text" class="validate" required>
+                <input placeholder="Enter video title" value="{{ video.title }}" name="title" id="title" type="text" class="validate" maxlength="50" required>
                 <label for="title">Title</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter video description" value="{{ video.description }}" name="description" id="description" type="text" class="validate" required>
+                <input placeholder="Enter video description" value="{{ video.description }}" name="description" id="description" type="text" class="validate" maxlength="255" required>
                 <label for="description">Description</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter image link address" value="{{ video.img_source }}" name="image" id="image" type="text" class="validate" required>
+                <input placeholder="Enter image link address" value="{{ video.img_source }}" name="image" id="image" type="text" class="validate" maxlength="255" required>
                 <label for="image">Image Link</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input placeholder="Enter video link address" value="{{ video.video_source }}" name="video" id="video" type="text" class="validate" required>
+                <input placeholder="Enter video link address" value="{{ video.video_source }}" name="video" id="video" type="text" class="validate" maxlength="255" required>
                 <label for="video">Video Link</label>
             </div>
         </div>

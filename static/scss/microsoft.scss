@@ -1,0 +1,23 @@
+/* Fix for Microsoft Edge */
+
+@supports (-ms-ime-align:auto) {
+    .z-depth-1 {
+        width: 286px !important;
+    }
+}
+
+/* Fix for IE 11 */
+
+@media all and (-ms-high-contrast:none) {
+    .z-depth-1 {
+        width: 286px !important;
+    }
+    
+    #nav-mobile > li > a > i{
+        display: none !important;
+    }
+    
+    .input-field{
+        text-align: left !important;
+    }
+}

@@ -16,38 +16,37 @@ body {
 .input-field input[type=text]:focus+label,
 .input-field input[type=email]:focus+label,
 .input-field input[type=password]:focus+label {
-        color: #e91e63;
+    color: #e91e63;
 }
 
 .input-field input[type=date]:focus,
 .input-field input[type=text]:focus,
 .input-field input[type=email]:focus,
 .input-field input[type=password]:focus {
-        border-bottom: 2px solid #e91e63;
-        box-shadow: none;
+    border-bottom: 2px solid #e91e63;
+    box-shadow: none;
 }
 
-.user-btn{
+.user-btn {
     color: #FFFFFF !important;
     font-weight: 600 !important;
 }
 
-.credentials{
+.credentials {
     background-color: $background-color !important;
     text-align: center;
 }
 
-.login-heading{
+.login-heading {
     font-weight: 500 !important;
     color: #FFFFFF !important;
 }
 
-.title h1{
+.title h1 {
     color: #FFFFFF !important;
     text-align: center;
 }
 
-.user-action-link a{
+.user-action-link a {
     color: #FFFFFF !important;
 }
-
