@@ -154,45 +154,47 @@ After running each possible scenario multiple times, going over each feature, us
 
 ### Unit Testing
 
-This project has 19 Unit Tests overall:
+This project has 20 Unit Tests overall:
 
 - ***testA***: This test is for setting the login username for a user
 
 - ***testB***: This test is for registering a new user. This tests an already existing username and comes back as exists in the system but works perfect using a non existing username I just don't want to keep creating new users for every test
 
-- ***testC***: This test is for authentication and checking if the login details match users in the database
+- ***testC***: This test is for seeing if a username already exists
 
-- ***testD***: This test uses the login username set in the first test and gets a user id using this username
+- ***testD***: This test is for authentication and checking if the login details match users in the database
 
-- ***testE***: This test is for getting a list of users profile videos and I just use my own account to test against with my user id so it only shows my videos
+- ***testE***: This test uses the login username set in the first test and gets a user id using this username
 
-- ***testF***: This test is for getting a list of other users profile videos and I just use my own account to test against with my user id so it only shows their videos
+- ***testF***: This test is for getting a list of users profile videos and I just use my own account to test against with my user id so it only shows my videos
 
-- ***testG***: This test creates a new video based on some test data, once the video is created the test does a query to the database to get the video id of the newly created video and then I use a function to set the video id as a global variable to be used for editing and deletion tests to ensure no data is left on the database from the tests
+- ***testG***: This test is for getting a list of other users profile videos and I just use my own account to test against with my user id so it only shows their videos
 
-- ***testH***: This test is for finding a video by video id
+- ***testH***: This test creates a new video based on some test data, once the video is created the test does a query to the database to get the video id of the newly created video and then I use a function to set the video id as a global variable to be used for editing and deletion tests to ensure no data is left on the database from the tests
 
-- ***testI***: This test is for editing a video and then checking if the new data matches the original test data
+- ***testI***: This test is for finding a video by video id
 
-- ***testJ***: This test is for ordering videos by categories
+- ***testJ***: This test is for editing a video and then checking if the new data matches the original test data
 
-- ***testK***: This test is for ordering my videos by reposted (saved) or original videos (posts)
+- ***testK***: This test is for ordering videos by categories
 
-- ***testL***: This test is for ordering videos by username
+- ***testL***: This test is for ordering my videos by reposted (saved) or original videos (posts)
 
-- ***testM***: This test is for getting the list of video categories 
+- ***testM***: This test is for ordering videos by username
 
-- ***testN***: This test is for getting a categories id by category name 
+- ***testN***: This test is for getting the list of video categories 
 
-- ***testO***: This test is registering a users vote and then checking if they voted 
+- ***testO***: This test is for getting a categories id by category name 
 
-- ***testP***: This test is for testing if a user has voted on a specific video
+- ***testP***: This test is registering a users vote and then checking if they voted 
 
-- ***testQ***: This test is for calculating the total amount of votes of a specific video
+- ***testQ***: This test is for testing if a user has voted on a specific video
 
-- ***testR***: This test if for getting all the vote information
+- ***testR***: This test is for calculating the total amount of votes of a specific video
 
-- ***testS***: This test uses the video id set during testG to delete all test data of this video
+- ***testS***: This test if for getting all the vote information
+
+- ***testT***: This test uses the video id set during testG to delete all test data of this video
 
 
 ## Deployment

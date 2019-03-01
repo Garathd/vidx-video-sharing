@@ -49,7 +49,8 @@ def local():
     
   
 # This is for setting either a local or remote database   
-database = remote
+database = local
+    
     
 """
 Register user to database
@@ -57,7 +58,8 @@ Register user to database
 def register(username, password):
 
     # Check if user exists already
-    value = authenticate(username, password)
+    value = exists(username)
+    
     if value == None:
         db = database()
     
@@ -77,6 +79,33 @@ def register(username, password):
       
     else:
         return False
+        
+        
+"""
+Check User Exists
+"""
+def exists(username):
+    
+    db = database()
+    
+    try:
+        with db.cursor() as cursor:
+          sql = "SELECT username FROM users WHERE username ='{0}'".format(username)
+          cursor.execute(sql)
+          result = cursor.fetchone()
+
+          if result == None:
+              return None
+          else:
+              return result
+          
+    except Exception as e:
+        print(e)
+        
+    finally:
+        db.close()
+        
+    return result
         
         
 """

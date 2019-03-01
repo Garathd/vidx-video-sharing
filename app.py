@@ -105,6 +105,9 @@ def regcheck():
 
         except:
             return redirect('/register')
+            
+    else:
+        return redirect('/register')
 
 
 """

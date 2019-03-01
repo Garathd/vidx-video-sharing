@@ -48,9 +48,17 @@ class tests(unittest.TestCase):
         
     
     """
-    Testing login user
+    Testing user exists
     """
     def testC(self):
+        result = db.exists(tests.username)
+        self.assertTrue(result)
+        
+    
+    """
+    Testing login user
+    """
+    def testD(self):
         result = db.authenticate(tests.username, tests.password)
         self.assertEqual(result[0], tests.username)
         
@@ -58,7 +66,7 @@ class tests(unittest.TestCase):
     """
     Testing get user id by username
     """
-    def testD(self):
+    def testE(self):
         result = int(db.getUserId(tests.username))
         self.assertGreater(result, 0)
          
@@ -66,7 +74,7 @@ class tests(unittest.TestCase):
     """
     Testing getting a users list of videos
     """    
-    def testE(self):
+    def testF(self):
         result = db.getMyVideos(tests.user_id)
         self.assertTrue(result)
         
@@ -74,7 +82,7 @@ class tests(unittest.TestCase):
     """
     Testing getting all the videos
     """    
-    def testF(self):
+    def testG(self):
         result = db.getOtherVideos(tests.user_id)
         self.assertTrue(result)
         
@@ -82,7 +90,7 @@ class tests(unittest.TestCase):
     """
     Testing Add a new video 
     """
-    def testG(self):
+    def testH(self):
         db.addVideo(tests.user_id, 
         tests.title, 
         tests.description, 
@@ -114,7 +122,7 @@ class tests(unittest.TestCase):
     """
     Test get Video By ID  
     """
-    def testH(self):
+    def testI(self):
         value = db.getVideoById(getVideoId())
         self.assertTrue(value)        
             
@@ -122,7 +130,7 @@ class tests(unittest.TestCase):
     """
     Testing Edit video 
     """
-    def testI(self):
+    def testJ(self):
         
         # Temporary data
         new_title = "Test"
@@ -142,7 +150,7 @@ class tests(unittest.TestCase):
     """
     Testing order videos by category
     """
-    def testJ(self):
+    def testK(self):
         
         args = {
             'category_id': 1
@@ -155,7 +163,7 @@ class tests(unittest.TestCase):
     """
     Testing ordering my videos by reposted or original posts
     """
-    def testK(self):
+    def testL(self):
         result = db.orderBySaved(tests.user_id, 0)
         self.assertTrue(result)
         
@@ -163,7 +171,7 @@ class tests(unittest.TestCase):
     """
     Testing ordering videos by username
     """
-    def testL(self):
+    def testM(self):
         result = db.orderByUser(2, tests.user_id)
         self.assertTrue(result)
     
@@ -171,7 +179,7 @@ class tests(unittest.TestCase):
     """
     Testing getting the list of video categories
     """
-    def testM(self):
+    def testN(self):
         result = db.getCategories()
         self.assertTrue(result)
         
@@ -179,7 +187,7 @@ class tests(unittest.TestCase):
     """
     Testing get categories id by category name
     """
-    def testN(self):
+    def testO(self):
         result = db.getCategoryIdByName(tests.category_name)
         self.assertTrue(result)
         
@@ -187,7 +195,7 @@ class tests(unittest.TestCase):
     """
     Testing Register a users vote and check if they voted
     """
-    def testO(self):
+    def testP(self):
         db.vote(getVideoId(), tests.user_id, 1)
         calc = db.calcVotes(getVideoId())
         self.assertGreater(calc, 0)
@@ -196,7 +204,7 @@ class tests(unittest.TestCase):
     """
     Testing if user has voted on a specific video
     """
-    def testP(self):
+    def testQ(self):
         result = db.checkVote(tests.user_id, getVideoId())
         self.assertEqual(result['count'], 1)
         
@@ -204,7 +212,7 @@ class tests(unittest.TestCase):
     """
     Testing calculate the total amount of votes of a specific video
     """
-    def testQ(self):
+    def testR(self):
         result = db.calcVotes(getVideoId())
         self.assertGreater(result, 0)
         
@@ -212,7 +220,7 @@ class tests(unittest.TestCase):
     """
     Testing get all vote information
     """
-    def testR(self):
+    def testS(self):
         result = db.getAllVotes()
         self.assertTrue(result)
 
@@ -220,7 +228,7 @@ class tests(unittest.TestCase):
     """
     Testing delete by video id
     """
-    def testS(self):
+    def testT(self):
         videoid = getVideoId()
         db.delete(videoid)
         
