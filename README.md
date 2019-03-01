@@ -36,7 +36,22 @@ User stories:
 
 ### Front-End
 
-My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. I have a few small sketches as I more or less knew in my head how I wanted the site to look. I done my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be be found in the [mockups folder](ds) 
+My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. I have a few small very basic sketches as I more or less knew in my head how I wanted the site to look. I done my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be be found in the [mockups folder](https://github.com/Garathd/milestone-project-4/tree/master/mockups)
+
+***Login/Register Pages***
+These pages are more or less the same design wise. If there is an issue with either login or registration then a brief information message should appear on the screen. New users will be directed to a welcome page.
+
+***Welcome Page***
+The welcome page appears to the new users and users who have no videos saved on their profile. This page explains how the site works and explains the various buttons.
+
+***All Videos Page***
+This page displays all the users videos except for the users videos who is signed in. Users are redirected to this page when they sign in and have existing videos on their profile or else click the logo when they are signed in. On this page you can repost videos as well as vote on videos. Videos can be ordered by user or by category.
+
+***My Videos Page***
+Also known as the profile page. This page lets you delete, edit and view your videos. This page also shows reposted videos. Videos can be ordered by category and status(original or reposted). The My Videos and the All Videos have more or less an identical design except for a few different options on videos.
+
+***New Video / Edit Video Page***
+These pages have identical design. The edit video pages text fields are populated with data from a choosen video and in the new video page the text fields are blank
 
 
 ### Back-End (MySQL Database)
