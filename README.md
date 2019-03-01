@@ -1,15 +1,15 @@
 # milestone-project-4
 
-This project is inspired by looking for streams and finding dead links to a TV Show or Movie that you maybe want to view. This application is not strictly limited to streaming and in no way shape or form am I promoting or encouraging this application to be used for streaming links it was just an inspiration!. I want this application to be something else, ideally originally created user content that works with momentum based videos. If it's bad then it gets deleted if it's good then it stays. 
+This project is inspired by looking for streams and finding dead links to a TV Show or Movie that you maybe want to view. This application is not strictly limited to streaming and in no way, shape or form am I promoting or encouraging this application to be used for streaming links it was just an inspiration! I want this application to be something else, ideally originally created user content that works with momentum based videos. If it's bad then it gets deleted if it's good, then it stays. 
 
 If a video link is rated -5 then the video gets deleted from the database unless someone else has saved (reposted) the video to their profile and in this circumstance a reposted (saved) video is only viewable and accessible to the user that has saved it.
 
 
 ## UX
 
-My UX process was to analyze the customers requirements and try and think of different ways to incorporate this into not only just a website but a website that is user friendly and easy to navigate.
+My UX process was to analyze the customer’s requirements and try and think of different ways to incorporate this into not only just a website but a website that is user friendly and easy to navigate.
 
-The clients requirements are:
+The client’s requirements are:
 
 - To be able to register and sign into an account
 - To be able to create, edit, delete and view videos on their account
@@ -24,9 +24,9 @@ User stories:
 
 - As a user I want to be able to create an account
 - As a user I want to be able to create, edit and delete videos
-- As a user I want to view other users videos
+- As a user I want to view other user’s videos
 - As a user I want the ability to save other users videos
-- As a user I want to be able to vote on other users videos as well as them with my videos
+- As a user I want to be able to vote on other user’s videos as well as them with my videos
 - As a user I want be able to see a videos score
 - As a user I want to see if I have already voted on a video
 - As a user I want to be able to log out of my account
@@ -36,7 +36,7 @@ User stories:
 
 ### Front-End
 
-My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how Youtube Presents it's videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just shows one video per row on smaller resolution devices. I have a few small very basic sketches as I more or less knew in my head how I wanted the site to look. I done my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be be found in the [mockups folder](https://github.com/Garathd/milestone-project-4/tree/master/mockups)
+My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how YouTube presents its videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just show one video per row on smaller resolution devices. I have a few small very basic sketches as I more or less knew in my head how I wanted the site to look. I done my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be found in the [mockups folder](https://github.com/Garathd/milestone-project-4/tree/master/mockups)
 
 ***Login/Register Pages***
 These pages are more or less the same design wise. If there is an issue with either login or registration then a brief information message should appear on the screen. New users will be directed to a welcome page.
@@ -45,13 +45,13 @@ These pages are more or less the same design wise. If there is an issue with eit
 The welcome page appears to the new users and users who have no videos saved on their profile. This page explains how the site works and explains the various buttons.
 
 ***All Videos Page***
-This page displays all the users videos except for the users videos who is signed in. Users are redirected to this page when they sign in and have existing videos on their profile or else click the logo when they are signed in. On this page you can repost videos as well as vote on videos. Videos can be ordered by user or by category.
+This page displays all the users’ videos except for the videos of the user that is signed in. Users are redirected to this page when they sign in and have existing videos on their profile or else click the logo when they are signed in. On this page you can repost videos as well as vote on videos. Videos can be ordered by user or by category.
 
 ***My Videos Page***
-Also known as the profile page. This page lets you delete, edit and view your videos. This page also shows reposted videos. Videos can be ordered by category and status(original or reposted). The My Videos and the All Videos have more or less an identical design except for a few different options on videos.
+Also known as the profile page. This page lets you delete, edit and view your videos. This page also shows reposted videos. Videos can be ordered by category and status (original or reposted). The My Videos and the All Videos pages have more or less an identical design except for a few different options on videos.
 
 ***New Video / Edit Video Page***
-These pages have identical design. The edit video pages text fields are populated with data from a choosen video and in the new video page the text fields are blank
+These pages have identical design. The edit video pages text fields are populated with data from a chosen video and in the new video page the text fields are blank
 
 
 ### Back-End (MySQL Database)
@@ -65,7 +65,7 @@ My Database consists of 4 tables:
 - ***categories***
 - ***votes***
 
-I had to set ``` ON DELETE CASCASE ``` on the *video id* FOREIGN KEY on the ***votes*** table that REFERENCES the *video id* PRIMARY KEY on the ***videos*** table. This was to ensure that if a video got deleted than all correpsonding vote data would be deleted 
+I had to set ``` ON DELETE CASCASE ``` on the *video id* FOREIGN KEY on the ***votes*** table that REFERENCES the *video id* PRIMARY KEY on the ***videos*** table. This was to ensure that if a video got deleted than all corresponding vote data would be deleted 
 
 
 The dump file for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/dump.sql)
@@ -79,9 +79,9 @@ The dump file for my database can be viewed [here](https://github.com/Garathd/mi
 
 The features of this application are as follows:
 
-- Ability to Register and Sign Into an Account
+- Ability to Register, Sign into and Logout of an Account
 - Ability to Create, Edit, Delete and View Videos
-- Ability to Repost videos to your profile page
+- Ability to repost videos to your profile page
 - Ability to vote on videos and if video has score of -5 then the ability to automatically delete them
 - Ability to see if voted on a particular video and to view its voting score
 - Ability to order by Category, Username, Reposted Videos and Original Videos
@@ -90,13 +90,13 @@ The features of this application are as follows:
 ## Features Left to Implement
 
 I still feel I could add a lot of features some more essential than others. I think the most essential thing would be a better authentication set up and the use of sessions. The way the user authentication works currently is that if a username and password is found in the database upon login check it saves the username in a global variable which is then used throughout the application to query different stuff from the database. 
-Also another thing I have really considered but I think would be potentially better at a future stage is to have each of the video categories as sub menu items to the All Videos menu item. It would definitely make it easier for users to find videos of a specific category. But then the more I thought about it I realised that if I only initially had a small number of users with below 200 videos in total it miight be better for them to scroll through all the videos and vote up or down on the videos. If a user got sick of seeing the same videos they would more than likely vote down a video ensuring that below par or questionable posts can be removed quicker.
+Also another thing I have really considered but I think would be potentially better at a future stage is to have each of the video categories as sub menu items to the All Videos menu item. It would definitely make it easier for users to find videos of a specific category. But then the more I thought about it I realised that if I only initially had a small number of users with below 200 videos in total it might be better for them to scroll through all the videos and vote up or down on the videos. If a user got sick of seeing the same videos they would more than likely vote down a video ensuring that below par or questionable posts can be removed quicker.
 
-If I was to get more users with more videos I would definitely implement the menu seperation of categories and also add a feature to each video to report users if content is deemed innappropiate by users. If someone gets 3 reports on their account then their profile is automatiacally deleted from the system. It works more or less the same as if a video gets -5 vote on a video. 
+If I was to get more users with more videos I would definitely implement the menu separation of categories and also add a feature to each video to report users if content is deemed inappropriate by users. If someone gets 3 reports on their account then their profile is automatically deleted from the system. It works more or less the same as if a video gets -5 votes on a video. 
 
-I think another cool feature would be if a username is clicked then it brings you that users profile where you can see information about them as well as posts on their page and also the ability to send messages to other users. The way it currently works is that if a username is clicked than the videos are ordered by that user.
+I think another cool feature would be if a username is clicked then it brings you that user’s profile where you can see information about them as well as posts on their page and also the ability to send messages to other users. The way it currently works is that if a username is clicked than the videos are ordered by that user.
 
-The ability to search videos is also a feature I would definitely implement at a latter stage if I was to get more videos and it was something initially that I was seriously considering doing in the first version of this application.
+The ability to search videos is also a feature I would definitely implement at a later stage if I was to get more videos and it was something initially that I was seriously considering doing in the first version of this application.
 
 
 ## Technologies Used
@@ -107,7 +107,7 @@ Flask is the Python Framework I’m using for this application
 
 ### CSS
 
-I'm using SCSS to build my css stylesheets and probably a little unconventially I'm using [Materialize](https://materializecss.com/) and also [Bootstrap 4](https://getbootstrap.com/). To be honest though it doesn't seem to have any adverse effects and over all looks better and is more responsive and visually pleasing out of the box when used together than individually. It was intially a mistake on my part but ended up looking pretty good. I also did a little research and decided to use the two of them after reading this [article](https://stackoverflow.com/questions/28613848/is-it-possible-to-integrate-materializecss-into-bootstrap). I also tried Material Design for bootstrap but wasn't happy with the way it looked
+I'm using SCSS to build my css style sheets and probably a little unconventionally I'm using [Materialize](https://materializecss.com/) and also [Bootstrap 4](https://getbootstrap.com/). To be honest though it doesn't seem to have any adverse effects and over all looks better and is more responsive and visually pleasing out of the box when used together than individually. It was initially a mistake on my part but ended up looking pretty good. I also did a little research and decided to use the two of them after reading this [article](https://stackoverflow.com/questions/28613848/is-it-possible-to-integrate-materializecss-into-bootstrap). I also tried Material Design for bootstrap but wasn't happy with the way it looked
 
 ### JQuery
 
@@ -130,7 +130,7 @@ After running each possible scenario multiple times, going over each feature, us
 
 #### Scenarios
 
-- Try register a user that already exists on the system
+- Try registering a user that already exists on the system
 - Register a new user
 - Login with incorrect details
 - Login in with correct details
@@ -145,10 +145,10 @@ After running each possible scenario multiple times, going over each feature, us
 - Order profile videos by Category
 - Order all videos by User
 - Order all videos by Category
-- Edit a video using the url and video id for a video that is mine
-- Edit a video using the url and video id for a video that is another users video
-- Delete a video using the url and video id for a video that is mine
-- Delete a video using the url and video id for a video that is another users video
+- Edit a video using the URL and video id for a video that is mine
+- Edit a video using the URL and video id for a video that is another user’s video
+- Delete a video using the URL and video id for a video that is mine
+- Delete a video using the URL and video id for a video that is another user’s video
 - Logout
 
 
@@ -160,7 +160,7 @@ This project has 19 Unit Tests overall:
 
 - ***testB***: This test is for registering a new user. This tests an already existing username and comes back as exists in the system but works perfect using a non existing username I just don't want to keep creating new users for every test
 
-- ***testC***: This test is for authentication and checking if the login details match a users in the database
+- ***testC***: This test is for authentication and checking if the login details match users in the database
 
 - ***testD***: This test uses the login username set in the first test and gets a user id using this username
 
@@ -176,7 +176,7 @@ This project has 19 Unit Tests overall:
 
 - ***testJ***: This test is for ordering videos by categories
 
-- ***testK***: This test is for ordering my videos by reposted(saved) or original videos(posts)
+- ***testK***: This test is for ordering my videos by reposted (saved) or original videos (posts)
 
 - ***testL***: This test is for ordering videos by username
 
@@ -199,9 +199,9 @@ This project has 19 Unit Tests overall:
 
 During development, all code was written in Cloud 9 and updates were saved and tested locally. Throughout the process I used [GitHub](https://github.com/Garathd/milestone-project-4) to keep track of changes and to maintain version control in my code base.
 
-The development version of my application is on github and I push this code using *git push origin master* and the code is run and tested on Cloud 9 before being updated to heroku
+The development version of my application is on GitHub and I push this code using *git push origin master* and the code is run and tested on Cloud 9 before being updated to heroku
 
-The production version of my application is deployed to heroku and I push this code using *git push heroku*  and the live application can be found [here](https://milestone-project-4.herokuapp.com/).
+The production version of my application is deployed to heroku and I push this code using *git push heroku* and the live application can be found [here](https://milestone-project-4.herokuapp.com/).
 
 
 ### Heroku Deployment Steps
@@ -217,10 +217,11 @@ The production version of my application is deployed to heroku and I push this c
 
 ## Content and Media
 
-All content and media on this application comes from whatever the users decide to upload and it's very existence on the system depends on whether user videos can retain a vote score of over -5
+All content and media on this application comes from whatever the users decide to upload and its very existence on the system depends on whether user videos can retain a vote score of over -5
 
 
 ## Acknowledgements
 
 - [ER Diagram Generator](https://app.sqldbm.com)
 - [ClearDB](https://elements.heroku.com/addons/cleardb)
+- [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd)
