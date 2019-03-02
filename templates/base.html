@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
     <header>
         <nav>
             <div class="nav-wrapper">
@@ -23,24 +24,20 @@
                 </div>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/profile">My Videos<i class="material-icons right">video_library</i></a></li>
-                    <li><a href="/videos">All Videos<i class="material-icons right">ondemand_video</i></a>
-                    </li>
-                    <li><a href="/new-video">New Video<i class="material-icons right">video_call</i></a>
-                    </li>
-                    <li><a href="/logout">Logout<i class="material-icons right">person</i></a>
-                    </li>
+                    <li><a href="/videos">All Videos<i class="material-icons right">ondemand_video</i></a></li>
+                    <li><a href="/new-video">New Video<i class="material-icons right">video_call</i></a></li>
+                    <li><a href="/logout">Logout<i class="material-icons right">person</i></a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li><a href="/profile">My Videos<i class="material-icons mobile-link right">video_library</i></a></li>
-                    <li><a href="/videos">All Videos<i class="material-icons mobile-link right">ondemand_video</i></a>
-                        <li><a href="/new-video">New Video<i class="material-icons mobile-link right">video_call</i></a>
-                        </li>
-                        <li><a href="/logout">Logout<i class="material-icons mobile-link right">person</i></a>
-                        </li>
+                    <li><a href="/videos">All Videos<i class="material-icons mobile-link right">ondemand_video</i></a></li>
+                    <li><a href="/new-video">New Video<i class="material-icons mobile-link right">video_call</i></a></li>
+                    <li><a href="/logout">Logout<i class="material-icons mobile-link right">person</i></a></li>
                 </ul>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <a id="the-top"><i class="material-icons">keyboard_arrow_up</i></a> 
         {% block content %} {% endblock %}

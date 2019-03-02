@@ -1,56 +1,59 @@
 {% extends 'credentials.html'%} {% block content %}
 
-  <div class="section"></div>
-  <h5 class="login-heading">Please, login into your account</h5>
+<div class="section"></div>
+<h5 class="login-heading">Please, login into your account</h5>
 
-  <div class="section">
-    <div class="message-display">
-      {% if message %} {% if message['message_type'] == "success" %}
-      <div class="messages" role="alert">
-        <strong>{{ message['message_info'] }}</strong>
-      </div>
-      {% else %}
-      <div class="messages" role="alert">
-        <strong>{{ message['message_info'] }}</strong>
-      </div>
-      {% endif %} {% endif %}
+<div class="section">
+  <div class="message-display">
+    {% if message %} {% if message['message_type'] == "success" %}
+    <div class="messages" role="alert">
+      <strong>{{ message['message_info'] }}</strong>
     </div>
-  </div>
-
-  <div class="container">
-    <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-
-      <form class="col s12" action="/check-user/" method="POST">
-        <div class='row'>
-          <div class='col s12'>
-          </div>
-        </div>
-
-        <div class='row'>
-          <div class='input-field col s12'>
-            <input class='validate' type='text' name='username' id='username' maxlength="50" required />
-            <label for='username'>Enter your username</label>
-          </div>
-        </div>
-
-        <div class='row'>
-          <div class='input-field col s12'>
-            <input class='validate' type='password' name='password' id='password' maxlength="50" required/>
-            <label for='password'>Enter your password</label>
-          </div>
-        </div>
-
-        <br />
- 
-          <div class='row'>
-            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo user-btn'>Login</button>
-          </div>
-     
-      </form>
+    {% else %}
+    <div class="messages" role="alert">
+      <strong>{{ message['message_info'] }}</strong>
     </div>
+    {% endif %} {% endif %}
   </div>
-  <div class="user-action-link">
-    <a href="/register">Create account</a>
+</div>
+
+<div class="container">
+  <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+    <form class="col s12" action="/check-user/" method="POST">
+
+      <div class='row'>
+        <div class='col s12'>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input class='validate' type='text' name='username' id='username' maxlength="50" required />
+          <label for='username'>Enter your username</label>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input class='validate' type='password' name='password' id='password' maxlength="50" required/>
+          <label for='password'>Enter your password</label>
+        </div>
+      </div>
+
+      <br />
+
+      <div class='row'>
+        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo user-btn'>Login</button>
+      </div>
+
+    </form>
+
   </div>
+</div>
+
+<div class="user-action-link">
+  <a href="/register">Create account</a>
+</div>
 
 {% endblock %}
