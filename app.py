@@ -260,8 +260,7 @@ def newplaylist():
         userid=userid, 
         categories=categories)
         
-    except Exception as e:
-        print(e)
+    except:
         return redirect('/')
     
     
@@ -292,8 +291,7 @@ def addvideo():
         
         return redirect('/{}'.format(user_name))
         
-    except Exception as e:
-        print(e)
+    except:
         return redirect('/')
             
             
@@ -325,8 +323,7 @@ def edit(videoid):
         else:
             return redirect('/profile')
             
-    except Exception as e:
-        print(e)
+    except:
         return redirect('/')
     
 

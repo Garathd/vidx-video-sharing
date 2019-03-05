@@ -45,6 +45,12 @@ I want this site to be self moderating where it's up to users what stays or what
 The way my authentication works is with a global variable that holds the username. If this variable life cyle is up then the application hits an exception and users are redirected back to the login screen. This is trying to imitate a session.
 In my app I have exceptions that catch all. I know this isn't exactly the best practise but my reasoning behind it is that I want to make the UX work as seamlessly in order to provide a smooth user experience. I plan to add more specific error handling in the future.
 
+
+### Possible Bugs
+
+When I got another user to test my application they seemed to encounter a bug related to add videos. While although I cant reproduce this at all I just want to note it. It seems the process the tester used was to create two different users accounts, then with user(a) create a new video and logout and login with the user(b) to check if the video was added to the All Videos section then logout and login in with user(a) and create a new video. The bug apparently doesn't let the user add a video the first time but only happens sometimes. Apart from that I really don't know to much about and I can't reproduce it.  
+
+
 ## Design
 
 ### Front-End
