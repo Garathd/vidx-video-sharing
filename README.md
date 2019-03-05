@@ -43,7 +43,7 @@ Another thing which is by design is that it's completely up to a user to be able
 I want this site to be self moderating where it's up to users what stays or what goes. Basically as the designer it's my way of not having any responsibilty what so ever of the content of this application. This application is basically a trial run and prototype of a future project that I want to create. This application will hopefully help me understand what my future project needs or doesn't need. 
 
 The way my authentication works is with a global variable that holds the username. If this variable life cyle is up then the application hits an exception and users are redirected back to the login screen. This is trying to imitate a session.
-In my app I have exceptions that catch all. I know this isn't exactly the best practise but my reasoning behind it is that I want to make the UX work as seamlessly in order to provide a smooth user experience. I plan to add more specific error handling in the future.
+In my app I have exceptions that catch all. I know this isn't exactly the best practise but my reasoning behind it is that I want to make the UX work as seamlessly as possible in order to provide a smooth user experience. I plan to add more specific error handling in the future.
 
 
 ### Possible Bugs
