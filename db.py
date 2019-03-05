@@ -51,7 +51,7 @@ def local():
 # This is for setting either a local or remote database   
 database = remote
     
-    
+
 """
 Register user to database
 """
