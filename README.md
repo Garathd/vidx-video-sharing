@@ -4,6 +4,8 @@ This project is inspired by looking for streams and finding dead links to a TV S
 
 If a video link is rated -5 then the video gets deleted from the database unless someone else has saved (reposted) the video to their profile and in this circumstance a reposted (saved) video is only viewable and accessible to the user that has saved it.
 
+(NB) I use the words saved and reposted interchangeably throughout my readme and application.
+
 
 ## UX
 
@@ -31,6 +33,17 @@ User stories:
 - As a user I want to see if I have already voted on a video
 - As a user I want to be able to log out of my account
 
+
+### Important UX Notes
+
+The All Videos page is based on Facebooks feed. Users can't view their own videos on the All Videos page. Other users can see original videos of said user but not reposted(saved) videos. 
+
+Another thing which is by design is that it's completely up to a user to be able to post as many videos of the same thing that they want because that is their choice. So for example if a user was to spam the All Videos section with the same video post then it's up to the other users to down vote the video until it gets deleted. In future features of this application I will include a "report a user". The report feature will delete a user and all their videos if they get reported 3 times. This is also mentioned in my future features section.
+
+I want this site to be self moderating where it's up to users what stays or what goes. Basically as the designer it's my way of not having any responsibilty what so ever of the content of this application. This application is basically a trial run and prototype of a future project that I want to create. This application will hopefully help me understand what my future project needs or doesn't need. 
+
+The way my authentication works is with a global variable that holds the username. If this variable life cyle is up then the application hits an exception and users are redirected back to the login screen. This is trying to imitate a session.
+In my app I have exceptions that catch all. I know this isn't exactly the best practise but my reasoning behind it is that I want to make the UX work as seamlessly in order to provide a smooth user experience. I plan to add more specific error handling in the future.
 
 ## Design
 

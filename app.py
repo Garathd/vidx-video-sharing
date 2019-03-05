@@ -94,6 +94,7 @@ def regcheck():
                     "message_info" : "{0}'s account has been created!".format(username)
                 }
                 return render_template('login.html', message=message)
+                
             else:
                 # Username has been taken
                 message = {
@@ -149,6 +150,7 @@ def check():
                     "message_type" : "error",
                     "message_info" : "Invalid Login Details!"
                 }
+                
                 return render_template('login.html', message=message)
             
         except:
@@ -173,6 +175,7 @@ def dashboard(username):
         # Getting list of my videos
         videos = db.getMyVideos(userid)
    
+        # If user has no videos redirect to welcome screen
         if not videos:
             return redirect('/welcome')
 
@@ -200,6 +203,7 @@ def profile():
         # Get Username
         user_name = db.getLogin()
         return redirect('/{}'.format(user_name))
+
     except:
         return redirect('/')
     
@@ -255,7 +259,9 @@ def newplaylist():
         user_name=user_name, 
         userid=userid, 
         categories=categories)
-    except: 
+        
+    except Exception as e:
+        print(e)
         return redirect('/')
     
     
@@ -286,7 +292,8 @@ def addvideo():
         
         return redirect('/{}'.format(user_name))
         
-    except: 
+    except Exception as e:
+        print(e)
         return redirect('/')
             
             
@@ -317,7 +324,9 @@ def edit(videoid):
             
         else:
             return redirect('/profile')
-    except:
+            
+    except Exception as e:
+        print(e)
         return redirect('/')
     
 
