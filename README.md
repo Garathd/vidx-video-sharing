@@ -64,10 +64,10 @@ I was considering also doing some mobile resolution mockups but its more or less
 These pages are more or less the same design wise. If there is an issue with either login or registration then a brief information message should appear on the screen. New users will be directed to a welcome page.
 
 ***Welcome Page***
-The welcome page appears to the new users and users who have no videos saved on their profile. This page explains how the site works and explains the various buttons.
+The welcome page appears to the new users and users who have no videos saved on their profile. This page explains how the site works and explains the various buttons. This is also the help page
 
 ***All Videos Page***
-This page displays all the users’ videos except for the videos of the user that is signed in. Users are redirected to this page when they sign in and have existing videos on their profile or else click the logo when they are signed in. On this page you can repost videos as well as vote on videos. Videos can be ordered by user or by category.
+This page displays all the users’ videos except for the videos of the user that is signed in. Users are redirected to this page when they sign in and if they have existing videos on their profile or else click the logo when they are signed in. On this page you can repost videos as well as vote on videos. Videos can be ordered by user or by category.
 
 ***My Videos Page***
 Also known as the profile page. This page lets you delete, edit and view your videos. This page also shows reposted videos. Videos can be ordered by category and status (original or reposted). The My Videos and the All Videos pages have more or less an identical design except for a few different options on videos.
@@ -111,13 +111,13 @@ The features of this application are as follows:
 
 ## Features Left to Implement
 
-Something I have really considered but I think would potentially be better at a future stage is to have each of the video categories as sub menu items to the All Videos menu item. It would definitely make it easier for users to find videos of a specific category. But then the more I thought about it I realised that if I only initially had a small number of users with below 200 videos in total it might be better for them to scroll through all the videos and vote up or down on the videos. If a user got sick of seeing the same videos they would more than likely vote down a video ensuring that below par or questionable posts can be removed quicker.
+Something I have really considered but I think would potentially be better at a future stage is to have each of the video categories as sub menu items to the All Videos menu item. It would definitely make it easier for users to find videos of a specific category. But then the more I thought about it I realised that if I only initially had a small number of users with below 200 videos in total it might be better for them to scroll through all the videos and vote up or down on the videos. If a user got sick of seeing the same videos they would more than likely vote down a video ensuring that below par or questionable videos can be removed quicker.
 
-If I was to get more users with more videos I would definitely implement the menu separation of categories and also add a feature to each video to report users if content is deemed inappropriate by users. If someone gets 3 reports on their account then their profile is automatically deleted from the system. It works more or less the same as if a video gets -5 votes on a video. 
+If I was to get more users with more videos I would definitely implement the menu separation of categories and also add a feature to each video to report users if content is deemed inappropriate by users. If someone gets 3 reports on their account for the one video then their profile is automatically deleted from the system as well as their votes and videos. The functionality works more or less the same as a video that gets -5 votes.
 
 I think another cool feature would be if a username is clicked then it brings you that user’s profile where you can see information about them as well as posts on their page and also the ability to send messages to other users. The way it currently works is that if a username is clicked than the videos are ordered by that user.
 
-The ability to search videos is also a feature I would definitely implement at a later stage if I was to get more videos and it was something initially that I was seriously considering doing in the first version of this application.
+The ability to search videos is also a feature I would definitely implement at a later stage if I was to get more videos and it was something that initially I was seriously considering doing in the first version of this application.
 
 
 ## Technologies Used
@@ -228,7 +228,7 @@ During development, all code was written in Cloud 9 and updates were saved and t
 
 The development version of my application is on GitHub and I push this code using *git push origin master* and the code is run and tested on Cloud 9 before being updated to heroku
 
-The production version of my application is deployed to heroku and I push this code using *git push heroku* and the live application can be found [here](https://milestone-project-4.herokuapp.com/).
+The production version of my application is deployed to heroku and I push this code using *git push heroku master* and the live application can be found [here](https://milestone-project-4.herokuapp.com/).
 
 
 ### Heroku Deployment Steps
