@@ -49,7 +49,7 @@ In my app I have exceptions that catch all. I know this isn't exactly the best p
 
 ### Possible Bugs
 
-When I got another user to test my application they seemed to encounter a bug related to add videos. While although I can't reproduce this at all I just want to note it. It seems the process the tester used was to create two different users accounts, then with user(a) create a new video and logout and login with the user(b) to check if the video was added to the All Videos section then logout and login in with user(a) and create a new video. The bug apparently doesn't let the user add a video the first time but only happens sometimes. Apart from that I really don't know too much about and I can't reproduce it.  
+If you sign into multiple accounts on the one browser all your logged in accounts automatically get logged into the most recent one that was logged into. This is due to the way my setLogin and getLogin functions work. The username is stored in a global session variable so this is why this happens when using the same browser and the same session
 
 
 ## Design
@@ -111,9 +111,7 @@ The features of this application are as follows:
 
 ## Features Left to Implement
 
-I still feel I could add a lot of features some more essential than others. I think the most essential thing would be a better authentication set up. The way the user authentication works currently is that if a username and password is found in the database upon login check it saves the username in a global session variable which is then used throughout the application to query different stuff from the database. 
-
-Also another thing I have really considered but I think would be potentially better at a future stage is to have each of the video categories as sub menu items to the All Videos menu item. It would definitely make it easier for users to find videos of a specific category. But then the more I thought about it I realised that if I only initially had a small number of users with below 200 videos in total it might be better for them to scroll through all the videos and vote up or down on the videos. If a user got sick of seeing the same videos they would more than likely vote down a video ensuring that below par or questionable posts can be removed quicker.
+Something I have really considered but I think would potentially be better at a future stage is to have each of the video categories as sub menu items to the All Videos menu item. It would definitely make it easier for users to find videos of a specific category. But then the more I thought about it I realised that if I only initially had a small number of users with below 200 videos in total it might be better for them to scroll through all the videos and vote up or down on the videos. If a user got sick of seeing the same videos they would more than likely vote down a video ensuring that below par or questionable posts can be removed quicker.
 
 If I was to get more users with more videos I would definitely implement the menu separation of categories and also add a feature to each video to report users if content is deemed inappropriate by users. If someone gets 3 reports on their account then their profile is automatically deleted from the system. It works more or less the same as if a video gets -5 votes on a video. 
 
