@@ -38,11 +38,11 @@ User stories:
 
 The All Videos page is based on Facebooks feed. Users can't view their own videos on the All Videos page. Other users can see original videos of said user but not reposted(saved) videos. 
 
-Another thing which is by design is that it's completely up to a user to be able to post as many videos of the same thing that they want because that is their choice. So for example if a user was to spam the All Videos section with the same video post then it's up to the other users to down vote the video until it gets deleted. In future features of this application I will include a "report a user". The report feature will delete a user and all their videos if they get reported 3 times. This is also mentioned in my future features section.
+Another thing which is by design is that it's completely up to a user to be able to post as many videos of the same thing that they want because that is their choice. So for example if a user was to spam the All Videos section with the same video post then it's up to the other users to down vote the video until it gets deleted. In future a feature that I will include in this application is a "report a user" option. The report feature will delete a user and all their videos if they get reported 3 times.
 
 I want this site to be self moderating where it's up to users what stays or what goes. Basically as the designer it's my way of not having any responsibility what so ever of the content of this application. This application is basically a trial run and prototype of a future project that I want to create. This application will hopefully help me understand what my future project needs or doesn't need. 
 
-The way my authentication works is with a global variable that holds the username and stores it in a session. If this variable life cycle is up then the application hits an exception and users are redirected back to the login screen. 
+The way my authentication works is with a global variable that holds the username and stores it in a session. If this session expires then the application hits an exception and users are redirected back to the login screen. 
 
 In my app I have exceptions that catch all. I know this isn't exactly the best practise but my reasoning behind it is that I want to make the UX work as seamlessly as possible in order to provide a smooth user experience. I plan to add more specific error handling in the future.
 
