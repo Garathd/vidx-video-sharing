@@ -36,7 +36,7 @@ User stories:
 
 ### Important UX Notes
 
-The All Videos page is based on Facebooks feed. Users can't view their own videos on the All Videos page. Other users can see original videos of said user but not reposted(saved) videos. 
+The All Videos page is based on Facebooks feed. Users can't view their own videos on the All Videos page only on the My Video page. Other users can see original videos of said user but not reposted(saved) videos. 
 
 Another thing which is by design is that it's completely up to a user to be able to post as many videos of the same thing that they want because that is their choice. So for example if a user was to spam the All Videos section with the same video post then it's up to the other users to down vote the video until it gets deleted. In future a feature that I will include in this application is a "report a user" option. The report feature will delete a user and all their videos if they get reported 3 times.
 
