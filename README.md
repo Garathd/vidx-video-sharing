@@ -40,22 +40,23 @@ The All Videos page is based on Facebooks feed. Users can't view their own video
 
 Another thing which is by design is that it's completely up to a user to be able to post as many videos of the same thing that they want because that is their choice. So for example if a user was to spam the All Videos section with the same video post then it's up to the other users to down vote the video until it gets deleted. In future features of this application I will include a "report a user". The report feature will delete a user and all their videos if they get reported 3 times. This is also mentioned in my future features section.
 
-I want this site to be self moderating where it's up to users what stays or what goes. Basically as the designer it's my way of not having any responsibilty what so ever of the content of this application. This application is basically a trial run and prototype of a future project that I want to create. This application will hopefully help me understand what my future project needs or doesn't need. 
+I want this site to be self moderating where it's up to users what stays or what goes. Basically as the designer it's my way of not having any responsibility what so ever of the content of this application. This application is basically a trial run and prototype of a future project that I want to create. This application will hopefully help me understand what my future project needs or doesn't need. 
 
-The way my authentication works is with a global variable that holds the username. If this variable life cyle is up then the application hits an exception and users are redirected back to the login screen. This is trying to imitate a session.
+The way my authentication works is with a global variable that holds the username. If this variable life cycle is up then the application hits an exception and users are redirected back to the login screen. This is trying to imitate a session.
+
 In my app I have exceptions that catch all. I know this isn't exactly the best practise but my reasoning behind it is that I want to make the UX work as seamlessly as possible in order to provide a smooth user experience. I plan to add more specific error handling in the future.
 
 
 ### Possible Bugs
 
-When I got another user to test my application they seemed to encounter a bug related to add videos. While although I cant reproduce this at all I just want to note it. It seems the process the tester used was to create two different users accounts, then with user(a) create a new video and logout and login with the user(b) to check if the video was added to the All Videos section then logout and login in with user(a) and create a new video. The bug apparently doesn't let the user add a video the first time but only happens sometimes. Apart from that I really don't know to much about and I can't reproduce it.  
+When I got another user to test my application they seemed to encounter a bug related to add videos. While although I can't reproduce this at all I just want to note it. It seems the process the tester used was to create two different users accounts, then with user(a) create a new video and logout and login with the user(b) to check if the video was added to the All Videos section then logout and login in with user(a) and create a new video. The bug apparently doesn't let the user add a video the first time but only happens sometimes. Apart from that I really don't know too much about and I can't reproduce it.  
 
 
 ## Design
 
 ### Front-End
 
-My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how YouTube presents its videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just show one video per row on smaller resolution devices. I have a few small very basic sketches as I more or less knew in my head how I wanted the site to look. I done my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be found in the [mockups folder](https://github.com/Garathd/milestone-project-4/tree/master/mockups).
+My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how YouTube presents its videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just show one video per row on smaller resolution devices. I have a few small very basic sketches as I more or less knew in my head how I wanted the site to look. I did my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be found in the [mockups folder](https://github.com/Garathd/milestone-project-4/tree/master/mockups).
 
 I was considering also doing some mobile resolution mockups but its more or less the same except for the mobile menu and the fact that instead of having 3 videos per row in the All Videos/ My Videos pages it just has one video per row.
 

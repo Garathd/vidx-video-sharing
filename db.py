@@ -1,27 +1,24 @@
 import os
 import pymysql
+from flask import session
 
 # Local Database Credentials
 user = os.getenv('C9_USER')
 password = ''
-
-# Init Username
-user_name = ''
 
 
 """
 Set Login Name
 """
 def setLogin(value):
-    global user_name
-    user_name = value
+    session['user'] = value
     
     
 """
 Get Login Name
 """
 def getLogin():
-    return user_name
+    return session['user']
     
     
 """
