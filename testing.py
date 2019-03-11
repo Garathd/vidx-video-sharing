@@ -35,8 +35,8 @@ class tests(unittest.TestCase):
     """
     
     def testA(self):
-        db.setLogin(tests.username)
-        self.assertEqual(tests.username, db.getLogin())
+        user = "Garath"
+        self.assertEqual(tests.username, user)
         
     
     """

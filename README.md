@@ -181,7 +181,7 @@ After running each possible scenario multiple times, going over each feature, us
 
 This project has 20 Unit Tests overall:
 
-- ***testA***: This test is for setting the login username for a user
+- ***testA***: This test is for the username which is going be used to get the users id
 
 - ***testB***: This test is for registering a new user. This tests an already existing username and comes back as exists in the system but works perfect using a non existing username I just don't want to keep creating new users for every test
 
