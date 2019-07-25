@@ -1,4 +1,4 @@
-# milestone-project-4
+# vidx-video-sharing
 
 This project is inspired by looking for streams and finding dead links to a TV Show or Movie that you maybe want to view. This application is not strictly limited to streaming and in no way, shape or form am I promoting or encouraging this application to be used for streaming links it was just an inspiration! I want this application to be something else, ideally originally created user content that works with momentum based videos. If it's bad then it gets deleted if it's good, then it stays. 
 
@@ -56,7 +56,7 @@ If you sign into multiple accounts on the one browser all your logged in account
 
 ### Front-End
 
-My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how YouTube presents its videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just show one video per row on smaller resolution devices. I have a few small very basic sketches as I more or less knew in my head how I wanted the site to look. I did my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be found in the [mockups folder](https://github.com/Garathd/milestone-project-4/tree/master/mockups).
+My design inspiration was essentially a YouTube and Facebook hybrid. I also took a little inspiration from Reddit with the Up Votes and Down Votes as I like it better than like and dislike. I like the layout of how YouTube presents its videos. I just modified it slightly to show 3 videos per row instead of 4 on the large resolution screen devices and then just show one video per row on smaller resolution devices. I have a few small very basic sketches as I more or less knew in my head how I wanted the site to look. I did my sketches using [Adobe XD](https://www.adobe.com/uk/products/xd.html?sdid=88X75SKR&mv=search&ef_id=CjwKCAiAqt7jBRAcEiwAof2uKyYmJoV3wlWgAtyiwwWG5Q9ndPqtJejDidjgRFtcyOti86rbwX6lkhoCu8IQAvD_BwE:g:s&s_kwcid=AL!3085!3!315413032962!e!!g!!adobe%20xd). Screenshots can be found in the [mockups folder](https://github.com/Garathd/vidx-video-sharing/tree/master/mockups).
 
 I was considering also doing some mobile resolution mockups but its more or less the same except for the mobile menu and the fact that instead of having 3 videos per row in the All Videos/ My Videos pages it just has one video per row.
 
@@ -90,11 +90,11 @@ My Database consists of 4 tables:
 I had to set ``` ON DELETE CASCASE ``` on the *video id* FOREIGN KEY on the ***votes*** table that REFERENCES the *video id* PRIMARY KEY on the ***videos*** table. This was to ensure that if a video got deleted than all corresponding vote data would be deleted 
 
 
-The dump file for my database can be viewed [here](https://github.com/Garathd/milestone-project-4/blob/master/dump.sql)
+The dump file for my database can be viewed [here](https://github.com/Garathd/vidx-video-sharing/blob/master/dump.sql)
 
 ### The ER Diagram for my database:
 
-![alt text](https://github.com/Garathd/milestone-project-4/blob/master/images/ER-Diagram.png)
+![alt text](https://github.com/Garathd/vidx-video-sharing/blob/master/images/ER-Diagram.png)
 
 
 ## Features
@@ -224,11 +224,11 @@ This project has 20 Unit Tests overall:
 
 ## Deployment
 
-During development, all code was written in Cloud 9 and updates were saved and tested locally. Throughout the process I used [GitHub](https://github.com/Garathd/milestone-project-4) to keep track of changes and to maintain version control in my code base.
+During development, all code was written in Cloud 9 and updates were saved and tested locally. Throughout the process I used [GitHub](https://github.com/Garathd/vidx-video-sharing) to keep track of changes and to maintain version control in my code base.
 
 The development version of my application is on GitHub and I push this code using *git push origin master* and the code is run and tested on Cloud 9 before being updated to heroku
 
-The production version of my application is deployed to heroku and I push this code using *git push heroku master* and the live application can be found [here](https://milestone-project-4.herokuapp.com/).
+The production version of my application is deployed to heroku and I push this code using *git push heroku master* and the live application can be found [here](https://vidx-video-sharing.herokuapp.com/).
 
 
 ### Heroku Deployment Steps
