@@ -1,4 +1,4 @@
-[![Build Status](hhttps://travis-ci.org/Garathd/vidx-video-sharing.svg?branch=master)](https://travis-ci.org/Garathd/vidx-video-sharing)
+[![Build Status](https://travis-ci.org/Garathd/vidx-video-sharing.svg?branch=master)](https://travis-ci.org/Garathd/vidx-video-sharing)
 
 # vidx-video-sharing
 
