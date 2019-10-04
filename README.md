@@ -1,3 +1,5 @@
+[![Build Status](hhttps://travis-ci.org/Garathd/vidx-video-sharing.svg?branch=master)](https://travis-ci.org/Garathd/vidx-video-sharing)
+
 # vidx-video-sharing
 
 This project is inspired by looking for streams and finding dead links to a TV Show or Movie that you maybe want to view. This application is not strictly limited to streaming and in no way, shape or form am I promoting or encouraging this application to be used for streaming links it was just an inspiration! I want this application to be something else, ideally originally created user content that works with momentum based videos. If it's bad then it gets deleted if it's good, then it stays. 
