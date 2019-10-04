@@ -1,5 +1,6 @@
 language: python
 python:
 - "3.4"
-install: "pip install -r requirements.txt"
-script: "echo running..."
+install: "pip3 install -r requirements.txt"
+script:
+- "python testing.py"
